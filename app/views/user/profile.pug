@@ -1,0 +1,31 @@
+extends ../layout
+block content
+
+  div.jumbotron
+    div.row
+      div.col-sm-4.col-lg-2.text-center.text-lg-left
+        img(src="/img/profile-default.png").img-responsive.img-circle
+      div.col-sm-8.col-lg-10.text-center.text-lg-left
+        h1= profile.username
+        p= `member since: ${moment(profile.created).fromNow()}`
+
+  div.row
+
+    div.col-lg-8
+      h2 Recent Game Results
+      div.card
+        div.card-header
+          div.row
+            div.col-8
+              div NUCLEOID
+            div.col-4
+              div.text-right 2018-06-23
+        div.card-body
+          p No recent game results.
+
+    div.col-lg-4
+      h2 Recent Achievements
+      div.card
+        div.card-body
+          h4 Stunning detonation
+          p #[span= user.username] destroyed 8 virus particles in one shot using the Detonator in NUCLEOID.

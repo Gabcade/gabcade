@@ -1,0 +1,13 @@
+extends ../layout
+block content
+  p.lead Please enter your username and password to log in and start trading now!
+  form(method="POST", action="/user/login")
+    div.form-group
+      label(for="username") #[strong username]
+      input(id="username", name="username", type="text", placeholder="Enter username", autocomplete="username").form-control
+    div.form-group
+      label(for="password") #[strong password]
+      input(id="password", name="password", type="password", placeholder="Enter password", autocomplete="new-password").form-control
+    div.form-group
+      button(type="submit").btn.btn-primary.mr-2 LOGIN
+      a(href="/").btn.btn-secondary Cancel

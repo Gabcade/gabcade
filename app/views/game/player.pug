@@ -1,0 +1,27 @@
+extends ../layout
+
+block gametitle
+  title NUCLEOID
+
+block gamecss
+  link(rel="shortcut icon", href=`/builds/${slug}/TemplateData/favicon.ico`)
+  link(rel="stylesheet", href=`/builds/${slug}/TemplateData/style.css`)
+
+block gamejs
+  script(src=`/builds/${slug}/Build/78586924f8856bbad7e15767a691574a.js`)
+
+block content
+  div.webgl-content
+    div(id="gameContainer", style="width: 960px; height: 540px;")
+    div.footer
+      div(onclick="gameInstance.SetFullscreen(1)").fullscreen
+
+  script.
+    var gameInstance = UnityLoader.instantiate(
+      "gameContainer",
+      `/builds/!{slug}/Build/1fcdb415550b489fe3ce44dd65e3760c.json`
+    );
+    // Unity, for whatever reason, sets margin:0 on gameContainer.
+    // That's not happening.
+    var div = document.getElementById('gameContainer');
+    div.style.margin = '';
