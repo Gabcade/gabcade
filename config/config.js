@@ -10,11 +10,16 @@ const config = {
   local: {
     root: rootPath,
     app: {
-      name: 'openplatform-us-local',
-      slogan: 'The decentralized media platform for local.'
+      name: 'gabcade-local',
+      slogan: 'Fun With Freedom #PlayFreely'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/openplatform-us-local',
+    db: 'mongodb://localhost/gabcade-local',
+    redis: {
+      "host": "0.0.0.0",
+      "port": 6379/*,
+      "password": "27f31fe0-69f9-4abd-b809-7712ef0d67bc"*/
+    },
     passwordSalt: 'de2af432-8c73-4461-ae58-168ef3a6abac',
     http: {
       enabled: true,
@@ -65,24 +70,23 @@ const config = {
   development: {
     root: rootPath,
     app: {
-      name: 'openplatform-us-development',
-      slogan: 'The decentralized media platform for developers.'
+      name: 'gabcade-development',
+      slogan: 'Fun With Freedom #PlayFreely'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/openplatform-us-development',
-    passwordSalt: '543bfc4e-a7ca-4365-87f2-233174053397',
-    twitter: {
-      consumer_key: 'M5c6BrBIJYomdiSSmdGm2dokF',
-      consumer_secret: 'SSnQ54cslkKikpTnHF5N8Gc7sTXczwqKHNnwuyirXQcKNbKpK0',
-      access_token_key: '894670938163335168-K1KWHI5V0CkFbIsYsEgYA9llQckSm9B',
-      access_token_secret: 'lEJQUIz4O8YbSYmlR0AGaAxgI7tRLzNmSrvFFg8W7MFFq'
+    db: 'mongodb://localhost/gabcade-development',
+    redis: {
+      "host": "0.0.0.0",
+      "port": 6379/*,
+      "password": "27f31fe0-69f9-4abd-b809-7712ef0d67bc"*/
     },
+    passwordSalt: '543bfc4e-a7ca-4365-87f2-233174053397',
     http: {
       enabled: true,
       redirectToHttps: false,
       healthMonitor: false,
       listen: {
-        host: 'local.openplatform.us',
+        host: '0.0.0.0',
         port: 3000
       },
       session: {
@@ -95,7 +99,7 @@ const config = {
           httpOnly: true,
           secure: false,
           maxAge: 604800000,
-          domain: 'dev.openplatform.us'
+          domain: 'dev.gabcade.com'
         },
         store: null
       }
@@ -105,7 +109,7 @@ const config = {
       cert: null,
       key: null,
       listen: {
-        host: 'dev.openplatform.us',
+        host: '0.0.0.0',
         port: 3443
       },
       session: {
@@ -114,7 +118,7 @@ const config = {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          domain: 'dev.openplatform.us',
+          domain: 'dev.gabcade.com',
           path: '/',
           httpOnly: true,
           secure: true,
@@ -128,18 +132,17 @@ const config = {
   test: {
     root: rootPath,
     app: {
-      name: 'openplatform-us-test',
-      slogan: 'The decentralized media platform for testers.'
+      name: 'gabcade-test',
+      slogan: 'Fun With Freedom #PlayFreely'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/openplatform-us-test',
-    passwordSalt: '16ea7e3d-5f02-4bad-9035-4d7746738337',
-    twitter: {
-      consumer_key: 'dUIgUhBLAlQ0xL86CWar7cC0t',
-      consumer_secret: 'mO50IvISDAmXUCzSGxa4BFl5GCCRzjS39Mld4GVKwzffetFRKk',
-      access_token_key: '894670938163335168-wPHIS8ccBaqadP48RmPSgr9vykB0jlP',
-      access_token_secret: 'z3X8xapeY6qMP79prLWuA7CoeKajeyLi1N4wqINWwdZa9'
+    db: 'mongodb://localhost/gabcade-test',
+    redis: {
+      "host": "0.0.0.0",
+      "port": 6379/*,
+      "password": "27f31fe0-69f9-4abd-b809-7712ef0d67bc"*/
     },
+    passwordSalt: '16ea7e3d-5f02-4bad-9035-4d7746738337',
     http: {
       enabled: true,
       redirectToHttps: false,
@@ -154,7 +157,7 @@ const config = {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          domain: 'test.openplatform.us',
+          domain: 'test.gabcade.com',
           path: '/',
           httpOnly: true,
           secure: false,
@@ -177,7 +180,7 @@ const config = {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          domain: 'test.openplatform.us',
+          domain: 'test.gabcade.com',
           path: '/',
           httpOnly: true,
           secure: true,
@@ -191,18 +194,17 @@ const config = {
   production: {
     root: rootPath,
     app: {
-      name: 'openplatform-us',
-      slogan: 'The decentralized media platform for everyone.'
+      name: 'gabcade',
+      slogan: 'Fun With Freedom #PlayFreely'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/openplatform-us-production',
-    passwordSalt: '18055dcf-d44f-45b2-8d74-ad38f6e4da89',
-    twitter: {
-      consumer_key: 'dUIgUhBLAlQ0xL86CWar7cC0t',
-      consumer_secret: 'mO50IvISDAmXUCzSGxa4BFl5GCCRzjS39Mld4GVKwzffetFRKk',
-      access_token_key: '894670938163335168-wPHIS8ccBaqadP48RmPSgr9vykB0jlP',
-      access_token_secret: 'z3X8xapeY6qMP79prLWuA7CoeKajeyLi1N4wqINWwdZa9'
+    db: 'mongodb://localhost/gabcade-production',
+    redis: {
+      "host": "0.0.0.0",
+      "port": 6379/*,
+      "password": "27f31fe0-69f9-4abd-b809-7712ef0d67bc"*/
     },
+    passwordSalt: '18055dcf-d44f-45b2-8d74-ad38f6e4da89',
     http: {
       enabled: true,
       redirectToHttps: false,
@@ -217,7 +219,7 @@ const config = {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          domain: 'openplatform.us',
+          domain: 'gabcade.com',
           path: '/',
           httpOnly: true,
           secure: false,
@@ -240,7 +242,7 @@ const config = {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          domain: 'openplatform.us',
+          domain: 'gabcade.com',
           path: '/',
           httpOnly: true,
           secure: true,
