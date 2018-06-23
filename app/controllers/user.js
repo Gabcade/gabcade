@@ -24,6 +24,11 @@ class UserController extends OpusService {
     super(app, config);
     var self = this;
 
+    router.use((req, res, next) => {
+      res.locals.currentView = 'profile';
+      next();
+    });
+
     router.post('/login', self.login.bind(self));
     router.post('/', self.createUser.bind(self));
 

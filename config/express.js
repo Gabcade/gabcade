@@ -1,9 +1,11 @@
 'use strict';
 
-const express = require('express');
 const glob = require('glob');
+const path = require('path');
 
-// const favicon = require('serve-favicon');
+const express = require('express');
+
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -35,7 +37,7 @@ module.exports = (app, config) => {
     next();
   });
 
-  // app.use(favicon(config.root + '/public/img/favicon.ico'));
+  app.use(favicon(path.join(config.root, 'public', 'img', 'favicon.ico')));
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({

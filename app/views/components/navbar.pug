@@ -1,27 +1,32 @@
 nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-3
-  a(href="/").navbar-brand.mr-2
-    img(src="/img/gabcade-brand.png", alt="gabcade.com logo").site-brand
-  button(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation").navbar-toggler
-    span.navbar-toggler-icon
+  div.container
+    a(href="/").navbar-brand.mr-2
+      img(src="/img/gabcade-brand.png", alt="gabcade.com logo").site-brand
+    button(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation").navbar-toggler
+      span.navbar-toggler-icon
 
-  div(id="navbarSupportedContent").collapse.navbar-collapse
-    ul.navbar-nav.mr-auto
-      li.nav-item.active
-        a(href="/").nav-link Home #[span.sr-only (current)]
-      li.nav-item
-        a(href="/games").nav-link Games
-    if (user)
-      a(href=`/user/${user.username}`).mr-3
-        img(src='/img/profile-default.png').profile
-      a(href=`/user/${user.username}`).profile.mr-3= user.username
-      a(href="/user/logout") logout
-      if (user.flags.isAdmin)
-        a(href="/admin").mx-3 admin
-    else
-      a(href="/user/signup").btn.btn-primary.mr-2 Sign Up
-      a(href="/user/login").btn.btn-primary Login
-    //- form(method="POST", action="/user/login").form-inline.my-2.my-sm-0
-    //-   input(type="text" placeholder="Username" aria-label="Username", autocomplete="current-username").form-control.mr-sm-1
-    //-   input(type="password" placeholder="Password" aria-label="Password", autocomplete="current-password").form-control.mr-sm-1
-    //-   //- input(type="search" placeholder="Search" aria-label="Search").form-control.mr-sm-2
-    //-   button(type="submit").btn.btn-outline-success.my-2.my-sm-0 Login
+    div(id="navbarSupportedContent").collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li(class= currentView === 'home' ? 'active' : null).nav-item
+          a(href="/").nav-link Home
+        li(class= currentView === 'games' ? 'active' : null).nav-item
+          a(href="/games").nav-link Games
+
+      if (user)
+        ul.navbar-nav
+          li(class= currentView === 'profile' ? 'active' : null).nav-item
+            a(href=`/user/${user.username}`).nav-link
+              img(src='/img/profile-default.png').profile
+          li(class= currentView === 'profile' ? 'active' : null).nav-item
+            a(href=`/user/${user.username}`).nav-link.profile= user.username
+          li.nav-item
+            a(href="/user/logout").nav-link logout
+          if (user.flags.isAdmin)
+            li.nav-item
+              a(href="/admin").nav-link admin
+      else
+        ul.navbar-nav
+          li.nav-item
+            a(href="/user/signup").btn.btn-primary Sign Up
+          li.nav-item
+            a(href="/user/login").btn.btn-primary Login

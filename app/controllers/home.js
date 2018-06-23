@@ -13,6 +13,11 @@ module.exports = (app) => {
   app.use('/', router);
 };
 
+router.use((req, res, next) => {
+  res.locals.currentView = 'home';
+  next();
+});
+
 router.get('/', (req, res, next) => {
   Article
   .find()

@@ -14,13 +14,21 @@ module.exports = (app) => {
   app.use('/games', router);
 };
 
+router.use((req, res, next) => {
+  res.locals.currentView = 'games';
+  next();
+});
+
 router.get('/:gameSlug', (req, res/*, next*/) => {
   var viewModel = {
-    slug: req.params.gameSlug
+    slug: req.params.gameSlug,
+    title: 'NUCLEOID',
+    engineFile: '78586924f8856bbad7e15767a691574a.js',
+    configFile: '650ffa3f67fee8162f343ecb428f691c.json'
   };
   switch (req.params.gameSlug) {
     case 'nucleoid':
-      res.render('game/player', viewModel);
+      res.render('game/unity-player', viewModel);
       break;
     case 'gabber':
       res.render('game/gabber', viewModel);

@@ -1,6 +1,6 @@
-# OpenPlatform.us User Manual for OPUS-2
+# gabcade.com User Manual
 
-OpenPlatform.us is the decentralized media platform for everyone! Licensed as MIT open source software
+The whole gabcade.com website is being released as MIT open source for folks to review, learn from, and see how to integrate with the Gab.ai API once it becomes available and I can get my hands on it!
 
 ## Installation
 
