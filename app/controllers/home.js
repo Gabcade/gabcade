@@ -18,6 +18,10 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get('/privacy', (req, res) => {
+  res.render('privacy');
+});
+
 router.get('/', (req, res, next) => {
   Article
   .find()
