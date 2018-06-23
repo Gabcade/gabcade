@@ -1,11 +1,42 @@
 extends ../layout
 block content
   div.row
-    div.col-lg-3.text-center
-      a(href="/games/nucleoid") NUCLEOID
-    div.col-lg-3.text-center
-      a(href="/games/gabber") GABBER
-    div.col-lg-3.text-center
-      a(href="/games/gaboom") GABOOM!
-    div.col-lg-3.text-center
-      a(href="/games/icann-command") ICANN COMMAND
+    div.col-lg-8
+      div.mb-3
+        a(href="/games/nucleoid")
+          img(src="/img/game-cards/nucleoid.jpg").responsive
+    div.col-lg-4
+      a(href="/games/nucleoid")
+        h4 NUCLEOID
+      
+      p.lead Welcome to the future of healthcare!
+      
+      p Nucleoid is an action arcade "zen" game similar to ATARI Asteroids. Protect the cell from virus attack by managing your energy, aiming carefully and having fast reflexes! Per-round accuracy and other bonuses let you rack up high scores quickly.
+      
+      p The game supports mouse, gamepad and touch input, requires WebGL and supports WebAssembly technology to run at native speeds with amazing 60fps gameplay on modest hardware.
+
+      div.game-credit
+        span.game-credit-label programming &amp; design
+        span.game-credit-value Rob Colbert
+      div.game-credit.mb-3
+        span.game-credit-label audio
+        span.game-credit-value Zack Colbert
+
+      div.hashtags
+        span
+          a(href="https://gab.ai/hash/MadeWithUnity").mr-2 #MadeWithUnity
+        span
+          a(href="https://gab.ai/hash/Unity3D").mr-2 #Unity3D
+        span
+          a(href="https://gab.ai/hash/indiegames").mr-2 #indiegames
+        span
+          a(href="https://gab.ai/hash/arcade").mr-2 #arcade
+        span
+          a(href="https://gab.ai/hash/singleplayer").mr-2 #singleplayer
+
+    //- div.col-lg-3.text-center
+    //-   a(href="/games/gabber") GABBER
+    //- div.col-lg-3.text-center
+    //-   a(href="/games/gaboom") GABOOM!
+    //- div.col-lg-3.text-center
+    //-   a(href="/games/icann-command") ICANN COMMAND

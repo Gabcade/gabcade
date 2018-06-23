@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed');
 
+@gabGreen: #25cc80;
+
 body {
   padding: 0;
   margin: 0;
@@ -9,7 +11,7 @@ body {
 }
 
 a, a:hover {
-  color: #25cc80;
+  color: @gabGreen;
 }
 
 img {
@@ -36,5 +38,33 @@ img {
     margin: 0;
     height: 28px;
     width: auto;
+  }
+}
+
+div.game-credit {
+  margin-bottom: 4px;
+
+  .game-credit-label {
+    display: block;
+    margin-right: 8px;
+  }
+  .game-credit-value {
+    display: inline-block;
+    margin-left: 12px;
+    font-weight: bold;
+  }
+}
+
+div.hashtags {
+  box-sizing: border-box;
+  display: block;
+  padding: 8px;
+  border: solid 1px ;
+  color: @gabGreen;
+  text-align: center;
+
+  span {
+    box-sizing: border-box;
+    display: inline-block;
   }
 }

@@ -10,6 +10,12 @@ html(lang='en')
       link(rel='stylesheet', href='/css/style.css')
     block gamecss
     block js
+      script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-5865185341985206",
+          enable_page_level_ads: true
+        });
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
     block gamejs

@@ -30,3 +30,27 @@ img.site-brand {
   height: 28px;
   width: auto;
 }
+div.game-credit {
+  margin-bottom: 4px;
+}
+div.game-credit .game-credit-label {
+  display: block;
+  margin-right: 8px;
+}
+div.game-credit .game-credit-value {
+  display: inline-block;
+  margin-left: 12px;
+  font-weight: bold;
+}
+div.hashtags {
+  box-sizing: border-box;
+  display: block;
+  padding: 8px;
+  border: solid 1px ;
+  color: #25cc80;
+  text-align: center;
+}
+div.hashtags span {
+  box-sizing: border-box;
+  display: inline-block;
+}
