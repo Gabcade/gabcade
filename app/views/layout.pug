@@ -25,6 +25,13 @@ html(lang='en')
     include components/navbar
 
     div.container.mb-3
+      if (!gdprConsentGiven)
+        div(role="alert").alert.alert-primary.alert-dismissible.fade.show.text-center
+          | #[strong GDPR Notice]: The #[a(href="/").alert-link gabcade.com] website uses cookies to offer users the ability to login, and we use Google AdSense for revenue. Please review our #[a(href="/privacy").alert-link privacy policy] before continuing to use this website.
+
+          button(type="button", data-dismiss="alert", aria-label="Close").close
+            span(aria-hidden="true") &times;
+
       block content
 
     div.container
