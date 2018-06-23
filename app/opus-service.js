@@ -1,5 +1,5 @@
 // opus-service.js
-// Copyright (C) 2018 theScoreX, Inc.
+// Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
 // All Rights Reserved
 
 const crypto = require('crypto');
