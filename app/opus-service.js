@@ -4,7 +4,7 @@
 
 const crypto = require('crypto');
 
-class ScorexService {
+class OpusService {
 
   constructor (app, config) {
     this.app = app;
@@ -21,4 +21,4 @@ class ScorexService {
   }
 }
 
-module.exports = ScorexService;
+module.exports = OpusService;
