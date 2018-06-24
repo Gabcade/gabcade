@@ -11,7 +11,7 @@ block content
         div.col-sm-8.col-lg-10.text-center.text-lg-left
           h1= profile.username
           if profile && profile.bio
-            p.lead!= markdown.toHTML(user.bio)
+            p.lead!= markdown.toHTML(profile.bio)
     
     // div.card-body
     //   p.lead This is where a user's recent public game activity will go. This will include game results, achievements and more.
