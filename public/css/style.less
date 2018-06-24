@@ -1,150 +1,23 @@
+/*
+ * style.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed');
 
-@gabGreen: #25cc80;
+@import 'components/variables.less';
 
-@gabcadeBgColor: #4a4a4a;
-@gabcadeTextColor: #c8c8c8;
-
-body {
-  padding: 80px 0 0 0;
-  margin: 0;
-  font: 16px "Encode Sans Condensed", sans-serif;
-  background-color: @gabcadeBgColor;
-  color: @gabcadeTextColor;
-}
-
-span.footer-hashtag {
-  display: inline-block;
-}
-
-a, a:hover {
-  color: @gabGreen;
-}
-
-a.btn.btn-primary,
-button.btn.btn-primary {
-  background-color: @gabGreen;
-  border-color: @gabGreen;
-  &:hover {
-    background-color: lighten(@gabGreen, 8%);
-  }
-}
-
-a.btn.btn-default,
-button.btn.btn-default {
-  background-color: @gabcadeBgColor;
-  border-color: @gabcadeBgColor;
-  &:hover {
-    background-color: lighten(@gabcadeBgColor, 8%);
-  }
-}
-
-div.sidebar-menu {
-  position: fixed;
-  top: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background-color: lighten(@gabcadeBgColor, 8%);
-  box-shadow: 0 0 12px rgba(0,0,0, 0.2);
-  z-index: 2000;
-  opacity: 1;
-
-  transition: width 0.5s, opacity 0.5s;
-
-  &.closed {
-    width: 0;
-    opacity: 0;
-  }
-
-  @media screen {
-    @media (min-width: 768px) {
-      width: 320px;
-    }
-  }
-}
-
-div.home-icon {
-  text-align: center;
-  color: @gabGreen;
-
-  i {
-    font-size: 128px;
-  }
-}
-
-img {
-
-  &.responsive {
-    width: 100%;
-    height: auto;
-  }
-  
-  &.profile {
-    height: 32px;
-    width: auto;
-  }
-
-  &.home-brand {
-    display: block;
-    max-width: 256px;
-    height: auto;
-    margin: 0 auto 0 auto;
-  }
-
-  &.site-brand {
-    padding: 0;
-    margin: 0;
-    height: 28px;
-    width: auto;
-  }
-}
-
-div.jumbotron,
-div.card {
-  background-color: lighten(@gabcadeBgColor, 6%);
-  color: @gabcadeTextColor;
-}
-
-div.card-header,
-div.card-footer {
-  background-color: lighten(@gabcadeBgColor, 8%);
-}
-
-div.card-body {
-  &.game-description {
-    max-height: 245px;
-    overflow-y: auto;
-  }
-}
-
-pre {
-  color: darken(@gabcadeTextColor, 6%);
-}
-
-div.game-credit {
-  margin-bottom: 4px;
-
-  .game-credit-label {
-    display: block;
-    margin-right: 8px;
-  }
-  .game-credit-value {
-    display: inline-block;
-    margin-left: 12px;
-    font-weight: bold;
-  }
-}
-
-div.hashtags {
-  box-sizing: border-box;
-  display: block;
-  color: @gabGreen;
-  text-align: center;
-
-  span {
-    box-sizing: border-box;
-    display: inline-block;
-  }
-}
+@import 'components/body.less';
+@import 'components/card.less';
+@import 'components/footer-hashtags.less';
+@import 'components/form.less';
+@import 'components/game-credit.less';
+@import 'components/hashtags.less';
+@import 'components/home-icon.less';
+@import 'components/img.less';
+@import 'components/jumbotron.less';
+@import 'components/links.less';
+@import 'components/pre.less';
+@import 'components/sidebar-menu.less';
+@import 'components/webgl-content.less';

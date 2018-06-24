@@ -1,18 +1,17 @@
 mixin renderUnityGame (game)
   div.row
     div.col-lg-8
-      div.mb-3
-        p
-          a(href=`/games/${game.slug}`)
-            img(src=`/img/game-cards/${game.slug}.jpg`).responsive
+      p.mb-0
+        a(href=`/game/${game.slug}`)
+          img(src=`/img/game-cards/${game.slug}.jpg`).responsive
           
     div.col-lg-4
-      div.card
+      div.card.mb-0
         div.card-header
-          a(href=`/games/${game.slug}`)
+          a(href=`/game/${game.slug}`)
             h4.text-center= game.title
         
-        a(href=`/games/${game.slug}`).btn.btn-info PLAY NOW!
+        a(href=`/game/${game.slug}`).btn.btn-info PLAY NOW!
         
         div.card-body.game-description
           p.lead= game.headline

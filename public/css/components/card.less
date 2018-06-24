@@ -1,0 +1,22 @@
+/*
+ * card.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+
+div.card {
+  background-color: lighten(@gabcadeBgColor, 6%);
+  color: @gabcadeTextColor;
+
+  div.card-header,
+  div.card-footer {
+    background-color: lighten(@gabcadeBgColor, 8%);
+  }
+
+  div.card-body {
+    &.game-description {
+      max-height: 245px;
+      overflow-y: auto;
+    }
+  }
+}

@@ -14,6 +14,7 @@ block content
         div.form-group
           label(for="bio") Bio
           textarea(id="bio", name="bio", rows="4", placeholder="Enter profile bio").form-control= profile.bio
+          small.form-text.text-muted Markdown syntax is fully supported including links.
     
       div.card-footer
         button(type="submit").btn.btn-primary Update profile

@@ -7,7 +7,13 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
   created: { type: Date, default: Date.now, required: true, index: -1 },
-  article: { type: Schema.ObjectId, required: true, index: true, ref: 'Article' },
+  subjectType: {
+    type: String,
+    enum: ['Game', 'Article', 'User'],
+    required: true,
+    index: true
+  },
+  subject: { type: Schema.ObjectId, required: true, index: true, refPath: 'subjectType' },
   author: { type: Schema.ObjectId, required: true, index: true, ref: 'User' },
   sentiment: { type: String, enum: ['positive','neutral','negative'], default: 'neutral', index: true },
   content: { type: String }

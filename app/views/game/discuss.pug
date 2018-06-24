@@ -1,0 +1,19 @@
+extends ../layout
+block content
+
+  include ../components/comment
+  include ../components/comment-composer
+
+  img(src=`/img/game-cards/${game.slug}.jpg`).responsive
+
+  +renderCommentComposer ('Game', game._id)
+
+  div.card.my-3
+    div.card-header
+      h4 Comments
+    div.card-body
+      if !comments || !comments.length
+        p There are no comments about #{game.title}.
+      else
+        each comment in comments
+          +renderComment(comment)

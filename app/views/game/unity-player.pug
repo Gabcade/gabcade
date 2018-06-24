@@ -12,13 +12,15 @@ block gamejs
   script(src=`/builds/${game.slug}/Build/${game.unity3d.engineFile}`)
 
 block content
-  div.webgl-content.mb-3
-    div(id="gameContainer", style="width: 960px; height: 540px;")
-  div.text-center
-    button(onclick="gameInstance.SetFullscreen(1)").btn.btn-default.btn-sm fullscreen
-
-  div
-    pre= JSON.stringify(game, null, 2)
+  
+  div.card.my-3
+    div.card-header= game.title
+    div.card-body
+      div.webgl-content
+        div(id="gameContainer").game-container.embed-responsive.embed-responsive-16by9
+    div.card-footer
+      button(onclick="gameInstance.SetFullscreen(1)").btn.btn-default.mr-3 fullscreen
+      a(href=`/game/${game.slug}/discuss`) Discuss
 
   script.
     var gameInstance = UnityLoader.instantiate(
@@ -29,3 +31,6 @@ block content
     // That's not happening.
     var div = document.getElementById('gameContainer');
     div.style.margin = '';
+
+    var canvas = document.querySelector('canvas');
+    canvas.classList.add('embed-responsive-item');

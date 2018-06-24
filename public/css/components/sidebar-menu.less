@@ -1,0 +1,31 @@
+/*
+ * sidebar-menu.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+
+div.sidebar-menu {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: lighten(@gabcadeBgColor, 8%);
+  box-shadow: 0 0 12px rgba(0,0,0, 0.2);
+  z-index: 2000;
+  opacity: 1;
+
+  transition: width 0.5s, opacity 0.5s;
+
+  &.closed {
+    width: 0;
+    opacity: 0;
+  }
+
+  @media screen {
+    @media (min-width: 768px) {
+      width: 320px;
+    }
+  }
+}

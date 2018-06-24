@@ -1,0 +1,19 @@
+mixin renderCommentComposer (subjectType, subjectId)
+  form(method="POST", action="/comment").mb-0
+    input(type="hidden", name="subjectType", value= subjectType)
+    input(type="hidden", name="subject", value= subjectId)
+    div.card.my-3
+      div.card-header
+        h4 Enter comment
+      div.card-body
+        div.form-group
+          label(for="content") Your comment
+          textarea(id="content", name="content", rows="4", placeholder="Enter your comment here").form-control
+        div.form-group.mb-0
+          label(for="sentiment") Comment sentiment
+          select(id="sentiment", name="sentiment").form-control
+            option(value="neutral", selected) Neutral
+            option(value="positive") Positive
+            option(value="negative") Negative
+      div.card-footer
+        button(type="submit").btn.btn-primary Post comment

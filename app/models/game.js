@@ -18,8 +18,8 @@ const GameSchema = new Schema({
   description: { type: String, required: true },
   tags: { type: [String] },
   stats: {
-    impressions: { type: Number, default: 0 },
-    plays: { type: Number, default: 0 }
+    impressions: { type: Number, default: 0 },          // on site, recurring
+    plays: { type: Number, default: 0 }                 // in game, recurring
   },
   images: {
     header: { type: Schema.ObjectId, ref: 'Image' },    // 1024 x 256

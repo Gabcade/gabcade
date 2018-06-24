@@ -1,19 +1,26 @@
+/*
+ * gulpfile.js
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+
+'use strict';
+
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
-const plumber = require('gulp-plumber');
+// const plumber = require('gulp-plumber');
 const livereload = require('gulp-livereload');
 const less = require('gulp-less');
 
 gulp.task('less', () => {
-  gulp.src('./public/css/*.less')
-    .pipe(plumber())
+  gulp.src('public/css/style.less')
     .pipe(less())
     .pipe(gulp.dest('./public/css'))
     .pipe(livereload());
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./public/css/*.less', ['less']);
+  gulp.watch('public/css/**/*.less', ['less']);
 });
 
 gulp.task('develop', () => {

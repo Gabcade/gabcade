@@ -1,4 +1,19 @@
+/*
+ * style.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed');
+/*
+ * variables.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+/*
+ * body.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
 body {
   padding: 80px 0 0 0;
   margin: 0;
@@ -6,9 +21,123 @@ body {
   background-color: #4a4a4a;
   color: #c8c8c8;
 }
+/*
+ * card.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.card {
+  background-color: #595959;
+  color: #c8c8c8;
+}
+div.card div.card-header,
+div.card div.card-footer {
+  background-color: #5e5e5e;
+}
+div.card div.card-body.game-description {
+  max-height: 245px;
+  overflow-y: auto;
+}
+/*
+ * footer-hashtags.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
 span.footer-hashtag {
   display: inline-block;
 }
+/*
+ * form.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+form small.form-text.text-muted {
+  color: #a8a8a8 !important;
+}
+/*
+ * game-credit.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.game-credit {
+  margin-bottom: 4px;
+}
+div.game-credit .game-credit-label {
+  display: block;
+  margin-right: 8px;
+}
+div.game-credit .game-credit-value {
+  display: inline-block;
+  margin-left: 12px;
+  font-weight: bold;
+}
+/*
+ * hashtags.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.hashtags {
+  box-sizing: border-box;
+  display: block;
+  color: #25cc80;
+  text-align: center;
+}
+div.hashtags span {
+  box-sizing: border-box;
+  display: inline-block;
+}
+/*
+ * home-icon.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.home-icon {
+  text-align: center;
+  color: #25cc80;
+}
+div.home-icon i {
+  font-size: 128px;
+}
+/*
+ * img.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+img.responsive {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+img.profile {
+  height: 32px;
+  width: auto;
+}
+img.home-brand {
+  display: block;
+  max-width: 256px;
+  height: auto;
+  margin: 0 auto 0 auto;
+}
+img.site-brand {
+  padding: 0;
+  margin: 0;
+  height: 28px;
+  width: auto;
+}
+/*
+ * jumbotron.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.jumbotron div.card {
+  background-color: #595959;
+  color: #c8c8c8;
+}
+/*
+ * links.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
 a,
 a:hover {
   color: #25cc80;
@@ -26,11 +155,25 @@ a.btn.btn-default,
 button.btn.btn-default {
   background-color: #4a4a4a;
   border-color: #4a4a4a;
+  color: #c8c8c8;
 }
 a.btn.btn-default:hover,
 button.btn.btn-default:hover {
   background-color: #5e5e5e;
 }
+/*
+ * pre.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+pre {
+  color: #b9b9b9;
+}
+/*
+ * sidebar-menu.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
 div.sidebar-menu {
   position: fixed;
   top: 0;
@@ -55,68 +198,12 @@ div.sidebar-menu.closed {
     width: 320px;
   }
 }
-div.home-icon {
-  text-align: center;
-  color: #25cc80;
-}
-div.home-icon i {
-  font-size: 128px;
-}
-img.responsive {
-  width: 100%;
-  height: auto;
-}
-img.profile {
-  height: 32px;
-  width: auto;
-}
-img.home-brand {
-  display: block;
-  max-width: 256px;
-  height: auto;
-  margin: 0 auto 0 auto;
-}
-img.site-brand {
-  padding: 0;
+/*
+ * webgl-content.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.webgl-content {
   margin: 0;
-  height: 28px;
-  width: auto;
-}
-div.jumbotron,
-div.card {
-  background-color: #595959;
-  color: #c8c8c8;
-}
-div.card-header,
-div.card-footer {
-  background-color: #5e5e5e;
-}
-div.card-body.game-description {
-  max-height: 245px;
-  overflow-y: auto;
-}
-pre {
-  color: #b9b9b9;
-}
-div.game-credit {
-  margin-bottom: 4px;
-}
-div.game-credit .game-credit-label {
-  display: block;
-  margin-right: 8px;
-}
-div.game-credit .game-credit-value {
-  display: inline-block;
-  margin-left: 12px;
-  font-weight: bold;
-}
-div.hashtags {
-  box-sizing: border-box;
-  display: block;
-  color: #25cc80;
-  text-align: center;
-}
-div.hashtags span {
-  box-sizing: border-box;
-  display: inline-block;
+  padding: 0;
 }

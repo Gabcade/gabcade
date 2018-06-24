@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 
 const Twitter = require('twitter');
 
-mongoose.connect(config.db);
+mongoose.connect(config.db, { useMongoClient: true });
 const db = mongoose.connection;
 db.on('error', () => {
   throw new Error('unable to connect to database at ' + config.db);

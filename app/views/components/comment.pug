@@ -1,0 +1,6 @@
+mixin renderComment (comment)
+  div.card
+    div.card-header
+      div.row
+        div.col= comment.author.username
+    div.card-body!= markdown.toHTML(comment.content)

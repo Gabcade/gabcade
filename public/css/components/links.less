@@ -1,0 +1,30 @@
+/*
+ * links.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+
+a, a:hover {
+  color: @gabGreen;
+}
+
+a.btn.btn-primary,
+button.btn.btn-primary {
+  background-color: @gabGreen;
+  border-color: @gabGreen;
+  &:hover {
+    background-color: lighten(@gabGreen, 8%);
+  }
+}
+
+a.btn.btn-default,
+button.btn.btn-default {
+  background-color: @gabcadeBgColor;
+  border-color: @gabcadeBgColor;
+  color: @gabcadeTextColor;
+
+  &:hover {
+    background-color: lighten(@gabcadeBgColor, 8%);
+  }
+}
+
