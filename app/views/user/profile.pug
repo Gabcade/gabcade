@@ -8,7 +8,8 @@ block content
           img(src="/img/profile-default.png").img-responsive.img-circle
         div.col-sm-8.col-lg-10.text-center.text-lg-left
           h1= profile.username
-          p.lead!= markdown.toHTML(user.bio)
+          if profile && profile.bio
+            p.lead!= markdown.toHTML(user.bio)
     
     // div.card-body
     //   p.lead This is where a user's recent public game activity will go. This will include game results, achievements and more.
