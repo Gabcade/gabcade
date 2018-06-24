@@ -1,6 +1,18 @@
 mixin renderComment (comment)
   div.card
-    div.card-header
+    div.card-header.small
       div.row
-        div.col= comment.author.username
-    div.card-body!= markdown.toHTML(comment.content)
+        div.col-5
+          a(href=`/user/${comment.author.username}`)= comment.author.username
+        div.col-2.text-center
+          img(src="/img/profile-default.png").responsive
+        div.col-5.text-right
+          a(href=`/game/${comment.subject.slug}`)= comment.subject.title
+    div.card-body
+      div!= markdown.toHTML(comment.content)
+    div.card-footer.small
+      div.row
+        div.col-6
+          a(href=`/comment/${comment._id}/reply`) Reply
+        div.col-6.text-right
+          a(href=`/comment/${comment._id}`)= moment(comment.created).fromNow()

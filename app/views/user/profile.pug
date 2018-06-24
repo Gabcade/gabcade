@@ -1,7 +1,9 @@
 extends ../layout
 block content
 
-  div.card
+  include ../components/comment
+
+  div.card.my-3
     div.card-header
       div.row
         div.col-sm-4.col-lg-2.text-center
@@ -14,16 +16,18 @@ block content
     // div.card-body
     //   p.lead This is where a user's recent public game activity will go. This will include game results, achievements and more.
     
-  // div.row
-  //   div.col-lg-8
-  //     h2 Recent Game Results
-  //     div.card
-  //       div.card-header.font-weight-bold NUCLEOID
-  //       div.card-body
-  //         p No recent game results.
-  //   div.col-lg-4
-  //     h2 Recent Achievements
-  //     div.card
-  //       div.card-header.font-weight-bold STUNNING DETONATION
-  //       div.card-body
-  //         p #[span= user.username] destroyed 8 virus particles in one shot using the Detonator in NUCLEOID.
+  div.row
+    div.col-lg-8
+      h3 Recent game results
+      p This space is reserved for recent game results played while logged in.
+
+    div.col-lg-4
+      h3 Recent achievements
+      p This space is reserved for recent achievements earned in-game.
+
+      h3 Recent comments
+      if !comments || !comments.length
+        p #{profile.username} hasn't posted any comments, yet. You know how to encourage them!
+      else
+        each comment in comments
+          +renderComment (comment)

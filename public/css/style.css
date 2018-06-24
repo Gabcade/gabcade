@@ -51,9 +51,6 @@ span.footer-hashtag {
  * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
  * License: MIT
  */
-form small.form-text.text-muted {
-  color: #a8a8a8 !important;
-}
 /*
  * game-credit.less
  * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
@@ -197,6 +194,14 @@ div.sidebar-menu.closed {
   div.sidebar-menu {
     width: 320px;
   }
+}
+/*
+ * small.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+small.text-muted {
+  color: #a0a0a0 !important;
 }
 /*
  * webgl-content.less

@@ -14,6 +14,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
 const User = mongoose.model('User');
+const Comment = mongoose.model('Comment'); // jshint ignore:line
 
 const OpusService = require('../opus-service');
 const uuidv4 = require('uuid/v4');
@@ -238,6 +239,15 @@ class UserController extends OpusService {
     .findOne({ username_lc: req.params.username.toLowerCase() })
     .then((user) => {
       viewModel.profile = user;
+      return Comment
+      .find({ author: user._id })
+      .sort({ created: -1 })
+      .limit(10)
+      .populate('subject')
+      .populate('author');
+    })
+    .then((comments) => {
+      viewModel.comments = comments;
       res.render('user/profile', viewModel);
     })
     .catch(next);
