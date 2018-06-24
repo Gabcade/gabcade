@@ -9,9 +9,25 @@ const Schema = mongoose.Schema;
 
 const AnnouncementSchema = new Schema({
   created: { type: Date, required: true, default: Date.now, },
+  ownerType: {
+    type: String,
+    enum: [
+      'Game',
+      'GameDeveloper',
+      'GameDevTeam',
+      'GameDevStudio',
+      'GameDevCompany'
+    ],
+    index: true
+  },
+  owner: { type: Schema.ObjectId, index: true, refPath: 'ownerType' },
   game: { type: Schema.ObjectId, ref: 'Game' },
   title: { type: String, required: true },
-  content: { type: String, required: true }
+  content: { type: String, required: true },
+  flags: {
+    isSticky: { type: Boolean, default: false, required: true, index: true }
+  }
 });
 
+console.log('model: Announcement');
 mongoose.model('Announcement', AnnouncementSchema);

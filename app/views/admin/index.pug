@@ -1,0 +1,23 @@
+extends ../layout
+block content
+  div.jumbotron
+    div.row
+      div.col-9
+        h1 Game Management
+      div.col-3
+        a(href="/admin/game").btn.btn-primary ADD GAME
+
+  table.table
+    thead
+      th Title
+      th Slug
+      th Team
+      th Plays
+    tbody
+      each game in games
+        tr
+          td
+            a(href=`/admin/game/${game._id}`)= game.title
+          td= game.slug
+          td= game.team ? game.team.name : 'N/A'
+          td= game.stats.plays

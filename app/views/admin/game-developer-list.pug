@@ -1,0 +1,22 @@
+extends ../layout
+block content
+
+  div.jumbotron
+    h1 Game Developers
+    a(href="/admin/game-developer-create").btn.btn-primary ADD DEVELOPER
+
+  if !developers || !developers.length
+    p.lead No developers on file. Create a new one above.
+  else
+    table
+      thead
+        th Name
+        th title
+        th team
+      tbody
+        each developer in developers
+          tr
+            td
+              a(href=`/admin/game-developer/${developer._id}`)= developer.name
+            td= developer.title
+            td= developer.team.name

@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-3
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.mb-3
   div.container
     a(href="/").navbar-brand.mr-2
       img(src="/img/gabcade-brand.png", alt="gabcade.com logo").site-brand
@@ -9,21 +9,26 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-3
       ul.navbar-nav.mr-auto
         li(class= currentView === 'home' ? 'active' : null).nav-item
           a(href="/").nav-link Home
+
         li(class= currentView === 'games' ? 'active' : null).nav-item
           a(href="/games").nav-link Games
 
+        li(class= currentView === 'announce' ? 'active' : null).nav-item
+          a(href="/announce").nav-link Announcements
+
       if (user)
         ul.navbar-nav
-          li(class= currentView === 'profile' ? 'active' : null).nav-item
+          li(class= currentView === 'profile' ? 'active' : null).nav-item.d-none.d-md-block
             a(href=`/user/${user.username}`).nav-link
               img(src='/img/profile-default.png').profile
+        ul.navbar-nav
           li(class= currentView === 'profile' ? 'active' : null).nav-item
             a(href=`/user/${user.username}`).nav-link.profile= user.username
+
+        ul.navbar-nav
           li.nav-item
-            a(href="/user/logout").nav-link logout
-          if (user.flags.isAdmin)
-            li.nav-item
-              a(href="/admin").nav-link admin
+            a(href="#").nav-link
+              i(onclick="return toggleSideMenu(event);").fas.fa-cogs
       else
         ul.navbar-nav
           li.nav-item

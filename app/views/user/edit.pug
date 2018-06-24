@@ -1,0 +1,19 @@
+extends ../layout
+block content
+  h1 New User Signup
+  p Please enter your username, password, and phone number. A code will be sent to your phone, and you must enter that code to complete registration.
+
+  form(method="POST", action=`/user/${user.username_lc}`)
+    div.card
+      div.card-header Edit Your Profile
+      
+      div.card-body
+        div.form-group
+          label(for="email") email address
+          input(id="email", name="email", type="email", placeholder="Enter email address", autocomplete="email", value= user.email, disabled).form-control
+        div.form-group
+          label(for="bio") Bio
+          textarea(id="bio", name="bio", rows="4", placeholder="Enter profile bio").form-control= profile.bio
+    
+      div.card-footer
+        button(type="submit").btn.btn-primary Update profile

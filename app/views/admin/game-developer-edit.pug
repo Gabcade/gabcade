@@ -1,0 +1,22 @@
+extends ../layout
+block content
+
+  form(method="POST", action=`/admin/game-developer/${developer._id}`)
+    div.card
+      div.card-header
+        h1 Edit Game Developer
+      div.card-body
+        div.form-group
+          label(for="name") Name
+          input(id="name", name="name", type="text", placeholder="Enter developer's name", value= developer.name).form-control
+        div.form-group
+          label(for="title") Title
+          input(id="title", name="title", type="text", placeholder="Enter developer's formal title", value= developer.title).form-control
+        div.form-group
+          label(for="creditAs") Credit as
+          input(id="creditAs", name="creditAs", type="text", placeholder="Enter developer's desired credit", value="developer.creditAs").form-control
+        div.form-group
+          label(for="bio") Biography
+          textarea(id="bio", name="bio", rows="4", placeholder="Enter developer's bio").form-control= developer.bio
+      div.card-footer
+        button(type="submit").btn.btn-primary UPDATE DEVELOPER

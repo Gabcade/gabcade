@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed');
 body {
-  padding: 0;
+  padding: 80px 0 0 0;
   margin: 0;
   font: 16px "Encode Sans Condensed", sans-serif;
   background-color: #4a4a4a;
@@ -9,6 +9,55 @@ body {
 a,
 a:hover {
   color: #25cc80;
+}
+a.btn.btn-primary,
+button.btn.btn-primary {
+  background-color: #25cc80;
+  border-color: #25cc80;
+}
+a.btn.btn-primary:hover,
+button.btn.btn-primary:hover {
+  background-color: #3edc94;
+}
+a.btn.btn-default,
+button.btn.btn-default {
+  background-color: #4a4a4a;
+  border-color: #4a4a4a;
+}
+a.btn.btn-default:hover,
+button.btn.btn-default:hover {
+  background-color: #5e5e5e;
+}
+div.sidebar-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #5e5e5e;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  opacity: 1;
+  transition: width 0.5s, opacity 0.5s;
+}
+div.sidebar-menu.closed {
+  width: 0;
+  opacity: 0;
+}
+@media screen and (min-width: 768px) {
+  div.sidebar-menu {
+    width: 320px;
+  }
+}
+div.home-icon {
+  text-align: center;
+  color: #25cc80;
+}
+div.home-icon i {
+  font-size: 128px;
 }
 img.responsive {
   width: 100%;
@@ -32,7 +81,19 @@ img.site-brand {
 }
 div.jumbotron,
 div.card {
-  color: #1a1a1a;
+  background-color: #595959;
+  color: #c8c8c8;
+}
+div.card-header,
+div.card-footer {
+  background-color: #5e5e5e;
+}
+div.card-body.game-description {
+  max-height: 245px;
+  overflow-y: auto;
+}
+pre {
+  color: #b9b9b9;
 }
 div.game-credit {
   margin-bottom: 4px;
@@ -49,8 +110,6 @@ div.game-credit .game-credit-value {
 div.hashtags {
   box-sizing: border-box;
   display: block;
-  padding: 8px;
-  border: solid 1px ;
   color: #25cc80;
   text-align: center;
 }

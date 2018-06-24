@@ -1,0 +1,25 @@
+mixin renderUnityGame (game)
+  div.row
+    div.col-lg-8
+      div.mb-3
+        p
+          a(href=`/games/${game.slug}`)
+            img(src=`/img/game-cards/${game.slug}.jpg`).responsive
+          
+    div.col-lg-4
+      div.card
+        div.card-header
+          a(href="/games/nucleoid")
+            h4.text-center= game.title
+        
+        a(href=`/games/${game.slug}`).btn.btn-info PLAY NOW!
+        
+        div.card-body.game-description
+          p.lead= game.headline
+          div!= markdown.toHTML(game.description)
+
+        div.card-footer
+          div.hashtags
+            each tag in game.tags
+              span
+                a(href=`https://gab.ai/hash/${tag}`).mr-2 ##[span= tag]

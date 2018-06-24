@@ -29,17 +29,33 @@ class UserController extends OpusService {
       next();
     });
 
+    router.param('username', (req, res, next, username) => {
+      User
+      .findOne({ username_lc: username })
+      .then((user) => {
+        if (!user) {
+          return Promise.reject(
+            new Error(`User '${username}' does not exist.`)
+          );
+        }
+        res.locals.profile = user;
+        next();
+      })
+      .catch(next);
+    });
+
+    router.post('/dismiss-alert/:alertId', self.dismissAlert.bind(self));
     router.post('/login', self.login.bind(self));
+    router.post('/:username', self.updateUser.bind(self));
     router.post('/', self.createUser.bind(self));
 
     router.get('/signup', self.getUserSignupForm.bind(self));
     router.get('/login', self.getLoginForm.bind(self));
     router.get('/logout', self.logout.bind(self));
 
+    router.get('/:username/edit', self.getUserEditForm.bind(self));
     router.get('/:username', self.getUser.bind(self));
     router.get('/', self.redirectUser.bind(self));
-
-    app.use('/user', router);
   }
 
   createUser (req, res, next) {
@@ -83,6 +99,17 @@ class UserController extends OpusService {
         }
         res.redirect('/');
       });
+    })
+    .catch(next);
+  }
+
+  updateUser (req, res, next) {
+    res.locals.profile.bio = req.body.bio;
+    res.locals.profile
+    .save()
+    .then((user) => {
+      res.locals.user = user;
+      res.redirect(`/user/${res.locals.profile.username_lc}`);
     })
     .catch(next);
   }
@@ -141,6 +168,32 @@ class UserController extends OpusService {
     res.render('user/login');
   }
 
+  dismissAlert (req, res) {
+    if (!req.user) {
+      return res.status(403).json({
+        message: 'Players must be authenticated to dismiss alerts. It is how we know who you are.'
+      });
+    }
+    if (req.params.alertId === 'gdpr') {
+      req.user.flags.isGdprDismissed = true;
+    } else {
+      return res.status(404).json({
+        message: `${req.params.alertId} is not a known alert. Stop it or I will entirely ban you and know who you are.`
+      });
+    }
+    req.user
+    .save()
+    .then(( ) => {
+
+    })
+    .catch((error) => {
+      console.log('GDPR error', error);
+      res.status(500).json({
+        message: 'Everything must be entirely broken or something. Quit trying.'
+      });
+    });
+  }
+
   login (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
@@ -153,7 +206,12 @@ class UserController extends OpusService {
         if (err) {
           return next(err);
         }
-        return res.redirect(`/user/${user.username}`);
+        user.lastLogin = new Date(Date.now());
+        user
+        .save()
+        .then(( ) => {
+          return res.redirect(`/user/${user.username}`);
+        });
       });
     })(req, res, next);
   }
@@ -161,6 +219,17 @@ class UserController extends OpusService {
   logout (req, res) {
     req.logout();
     res.redirect('/user/login');
+  }
+
+  getUserEditForm (req, res, next) {
+    var viewModel = { };
+    User
+    .findOne({ username_lc: req.params.username.toLowerCase() })
+    .then((user) => {
+      viewModel.profile = user;
+      res.render('user/edit', viewModel);
+    })
+    .catch(next);
   }
 
   getUser (req, res, next) {
@@ -184,6 +253,8 @@ class UserController extends OpusService {
 
 module.exports = (app, config) => {
   var controller = new UserController(app, config);
+  app.use('/user', router);
+
   var dbpath = path.join(
     config.root,
     'node_modules',
@@ -191,7 +262,6 @@ module.exports = (app, config) => {
     'databases',
     'GeoLite2-City.mmdb'
   );
-
   console.log('loading GeoLite2-City.mmdb');
   controller.geoip2 = require('geoip2');
   controller.geoip2.init(dbpath);

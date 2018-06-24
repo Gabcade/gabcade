@@ -10,7 +10,10 @@ const ArticleSchema = new Schema({
   author: { type: Schema.ObjectId, required: true, index: true, ref: 'User' },
   title: { type: String, required: true },
   slug: { type: String, required: true, index: true, lowercase: true, unique: true },
-  content: { type: String, required: true }
+  content: { type: String, required: true },
+  headerImage: { type: Schema.ObjectId, ref: 'Image' },
+  icon: { type: Schema.ObjectId, ref: 'Image' }
 });
 
+console.log('model: Article');
 mongoose.model('Article', ArticleSchema);

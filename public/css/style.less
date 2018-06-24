@@ -2,16 +2,72 @@
 
 @gabGreen: #25cc80;
 
+@gabcadeBgColor: #4a4a4a;
+@gabcadeTextColor: #c8c8c8;
+
 body {
-  padding: 0;
+  padding: 80px 0 0 0;
   margin: 0;
   font: 16px "Encode Sans Condensed", sans-serif;
-  background-color: #4a4a4a;
-  color: #c8c8c8;
+  background-color: @gabcadeBgColor;
+  color: @gabcadeTextColor;
 }
 
 a, a:hover {
   color: @gabGreen;
+}
+
+a.btn.btn-primary,
+button.btn.btn-primary {
+  background-color: @gabGreen;
+  border-color: @gabGreen;
+  &:hover {
+    background-color: lighten(@gabGreen, 8%);
+  }
+}
+
+a.btn.btn-default,
+button.btn.btn-default {
+  background-color: @gabcadeBgColor;
+  border-color: @gabcadeBgColor;
+  &:hover {
+    background-color: lighten(@gabcadeBgColor, 8%);
+  }
+}
+
+div.sidebar-menu {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: lighten(@gabcadeBgColor, 8%);
+  box-shadow: 0 0 12px rgba(0,0,0, 0.2);
+  z-index: 2000;
+  opacity: 1;
+
+  transition: width 0.5s, opacity 0.5s;
+
+  &.closed {
+    width: 0;
+    opacity: 0;
+  }
+
+  @media screen {
+    @media (min-width: 768px) {
+      width: 320px;
+    }
+  }
+}
+
+div.home-icon {
+  text-align: center;
+  color: @gabGreen;
+
+  i {
+    font-size: 128px;
+  }
 }
 
 img {
@@ -41,8 +97,26 @@ img {
   }
 }
 
-div.jumbotron, div.card {
-  color: #1a1a1a;
+div.jumbotron,
+div.card {
+  background-color: lighten(@gabcadeBgColor, 6%);
+  color: @gabcadeTextColor;
+}
+
+div.card-header,
+div.card-footer {
+  background-color: lighten(@gabcadeBgColor, 8%);
+}
+
+div.card-body {
+  &.game-description {
+    max-height: 245px;
+    overflow-y: auto;
+  }
+}
+
+pre {
+  color: darken(@gabcadeTextColor, 6%);
 }
 
 div.game-credit {
@@ -62,8 +136,6 @@ div.game-credit {
 div.hashtags {
   box-sizing: border-box;
   display: block;
-  padding: 8px;
-  border: solid 1px ;
   color: @gabGreen;
   text-align: center;
 

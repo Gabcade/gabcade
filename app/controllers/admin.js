@@ -8,25 +8,174 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
+
+const GameDeveloper = mongoose.model('GameDeveloper');
+const GameDevTeam = mongoose.model('GameDevTeam');
+const GameDevStudio = mongoose.model('GameDevStudio');
+const GameDevCompany = mongoose.model('GameDevCompany');
 const Game = mongoose.model('Game');
 
 module.exports = (app) => {
   app.use('/admin', router);
 };
 
-router.post('/game', (req, res, next) => {
-  var viewModel = { };
-  Game.create({
-    slug: req.body.slug,
-    title: req.body.title,
-    description: req.body.description
-  })
+router.param('gameId', (req, res, next, gameId) => {
+  Game
+  .findById(gameId)
   .then((game) => {
-    viewModel.game = game;
-    viewModel.slug = 'nucleoid';
-    res.render('game/created', viewModel);
+    res.locals.game = game;
+    next();
   })
   .catch(next);
+});
+
+router.param('developerId', (req, res, next, developerId) => {
+  GameDeveloper
+  .findById(developerId)
+  .then((developer) => {
+    res.locals.developer = developer;
+    next();
+  })
+  .catch(next);
+});
+
+router.param('teamId', (req, res, next, teamId) => {
+  GameDevTeam
+  .findById(teamId)
+  .then((devTeam) => {
+    res.locals.devTeam = devTeam;
+    next();
+  })
+  .catch(next);
+});
+
+router.param('studioId', (req, res, next, studioId) => {
+  GameDevStudio
+  .findById(studioId)
+  .then((devStudio) => {
+    res.locals.devStudio = devStudio;
+    next();
+  })
+  .catch(next);
+});
+
+router.param('companyId', (req, res, next, companyId) => {
+  GameDevCompany
+  .findById(companyId)
+  .then((devCompany) => {
+    res.locals.devCompany = devCompany;
+    next();
+  })
+  .catch(next);
+});
+
+/*
+ * GAME DEVELOPER
+ */
+
+router.post('/game-developer/:developerId', (req, res, next) => {
+  res.locals.developer.name = req.body.name;
+  res.locals.developer.headline = req.body.headline;
+  res.locals.developer.description = req.body.description;
+  res.locals.developer
+  .save()
+  .then((developer) => {
+    res.locals.developer = developer;
+    res.redirect(`/admin/game-developer/${developer._id}`);
+  })
+  .catch(next);
+});
+
+router.get('/game-developer/:developerId', (req, res) => {
+  res.render('admin/game-developer-edit', res.locals.developer);
+});
+
+router.post('/game-developer', (req, res, next) => {
+  GameDeveloper
+  .create({
+    team: req.body.teamId,
+    name: req.body.name,
+    title: req.body.title,
+    creditAs: req.body.creditAs,
+    bio: req.body.bio
+  })
+  .then((gameDeveloper) => {
+    res.redirect(`/admin/game-developer/${gameDeveloper._id}`);
+  })
+  .catch(next);
+});
+
+router.get('/game-developer-create', (req, res) => {
+  res.render('admin/game-developer-create');
+});
+
+router.get('/game-developer', (req, res, next) => {
+  var viewModel = { };
+  GameDeveloper
+  .find()
+  .sort({ name: 1 })
+  .limit(10)
+  .populate('team')
+  .then((developers) => {
+    viewModel.developers = developers;
+    res.render('admin/game-developer-list', viewModel);
+  })
+  .catch(next);
+});
+
+/*
+ * GAME
+ */
+
+router.post('/game/:gameId', (req, res, next) => {
+  res.locals.game.slug = req.body.slug;
+  res.locals.game.technology = req.body.technology;
+  res.locals.game.title = req.body.title;
+  res.locals.game.headline = req.body.headline;
+  res.locals.game.description = req.body.description;
+  res.locals.game.tags = req.body.tags.split(' ');
+  res.locals.game
+  .save()
+  .then((game) => {
+    res.locals.game = game;
+    res.redirect(`/admin/game/${game._id}`);
+  })
+  .catch(next);
+});
+
+router.post('/game', (req, res, next) => {
+  Game.create({
+    slug: req.body.slug,
+    technology: req.body.technology,
+    title: req.body.title,
+    headline: req.body.headline,
+    description: req.body.description,
+    tags: req.body.tags.split(' ')
+  })
+  .then((game) => {
+    res.redirect(`/admin/game/${game._id}`);
+  })
+  .catch(next);
+});
+
+router.get('/game/:gameId', (req, res, next) => {
+  var viewModel = { };
+  Game
+  .findById(req.params.gameId)
+  .then((game) => {
+    if (!game) {
+      return Promise.reject(
+        new Error('The selected game does not exist.')
+      );
+    }
+    viewModel.game = game;
+    res.render('admin/game-edit', viewModel);
+  })
+  .catch(next);
+});
+
+router.get('/game', (req, res) => {
+  res.render('admin/game-create');
 });
 
 router.get('/', (req, res, next) => {
@@ -34,6 +183,7 @@ router.get('/', (req, res, next) => {
   Game
   .find()
   .limit(10)
+  .populate('team')
   .then((games) => {
     viewModel.games = games;
     res.render('admin/index', viewModel);

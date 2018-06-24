@@ -1,0 +1,22 @@
+extends ../layout
+block content
+
+  form(method="POST", action="/admin/game-developer")
+    div.card
+      div.card-header
+        h1 Add Game Developer
+      div.card-body
+        div.form-group
+          label(for="name") Name
+          input(id="name", name="name", type="text", placeholder="Enter developer's name").form-control
+        div.form-group
+          label(for="title") Title
+          input(id="title", name="title", type="text", placeholder="Enter developer's formal title").form-control
+        div.form-group
+          label(for="creditAs") Credit as
+          input(id="creditAs", name="creditAs", type="text", placeholder="Enter developer's desired credit").form-control
+        div.form-group
+          label(for="bio") Biography
+          textarea(id="bio", name="bio", rows="4", placeholder="Enter developer's bio").form-control
+      div.card-footer
+        button(type="submit").btn.btn-primary ADD DEVELOPER

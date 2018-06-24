@@ -1,0 +1,15 @@
+extends ../layout
+block content
+  div.jumbotron
+    h1 Announcements
+  if !announcements || !announcements.length
+    div.card
+      div.card-body There are no announcements.
+  each announcement in announcements
+    div.card
+      div.card-header= announcement.title
+      div.card-body!= markdown.toHTML(announcement.content)
+      div.card-footer
+        div.row
+          div.col-6= moment(announcement.created).fromNow()
+          div.col-6= game.title

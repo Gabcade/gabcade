@@ -1,26 +1,34 @@
 extends layout
 block content
 
-  p
-    img(src="/img/gabcade-logo-large.png", alt="gabcade logo").home-brand
-    br
-
-  h1.text-center gabcade.com
+  div
+    a(href="/games")
+      img(src="/img/gabcade-logo-large.png", alt="gabcade logo").home-brand
+  
+  h1.text-center.my-3 gabcade.com
 
   p.lead Welcome to gabcade.com, a community-powered online video game arcade 100% dedicated to the Gab.ai community. As soon as possible, you'll be able to log in and compete on the leaderboards with your friends from #[a(href="https://gab.ai", target="_blank") gab.ai].
 
-  div.row
-    div.col-lg-4
-      p Gab doesn't have advertising, but we can't exist without it. gabcade uses in-game ads to pay for it's existence and to pay the game developers building you these awesome experiences. This site can't exist without it.
-    div.col-lg-4
-      p Gab Pro users will have additional benefits here including access to the VIP room where some of the most exclusive games, early releases and more are for your eyes only.
-    div.col-lg-4
-      p We are not owned by or controlled by Gab.ai, but Gab's leadership does have input here and we try to follow their guidance as best we can to help ensure a similar community experience between the two sites.
-
-  h2.text-center The Freedom To Have FUN!
+  div.card.mb-3
+    div.card-body
+      div.row
+        div.col-lg-4
+          div.home-icon.mb-3
+            i.fas.fa-bullhorn
+          p Gab doesn't have advertising, but we can't exist without it. gabcade uses in-game ads to pay for it's existence and to pay the game developers building you these awesome experiences. This site can't exist without it.
+        
+        div.col-lg-4
+          div.home-icon.mb-3
+            i.fab.fa-expeditedssl
+          p Gab Pro users will have additional benefits here including access to the VIP room where some of the most exclusive games, early releases and more are for your eyes only.
+        
+        div.col-lg-4
+          div.home-icon.mb-3
+            i.far.fa-handshake
+          p We are not owned by or controlled by Gab.ai, but Gab's leadership does have input here and we try to follow their guidance as best we can to help ensure a similar community experience between the two sites.
   
-  p This site is much less about the freedom of speech and communication than Gab.ai. If you want to #SpeakFreely, hop on over to Gab and get your fill of First Amendment freedom. We are about allowing game publishers to bring you new experiences without worrying about being rejected from an "App Store" for expressing themselves in a way that might not be popular among those in control of said App Stores.
-  
-  p We don't know what to expect. You might get to play a game about punching Hillary Clinton in the face. Maybe you'll get to change Laura Loomer's car tires. Some developer out there might let you use a flamethrower on streets full of #BlackLivesMatter protesters or perhaps run them over with a powerful SUV.
+  p.lead This site is much less about the freedom of speech and communication than Gab.ai. If you want to #[a(href="https://gab.ai/hash/SpeakFreely", target="_blank") #SpeakFreely], hop on over to Gab and get your fill of First Amendment freedom. We are about allowing game publishers to bring you new experiences without worrying about being rejected from an "App Store" for expressing themselves in a way that might not be popular among those in control of said App Stores.
 
-  p We just don't know what to expect. But, we think it's going to be enjoyable.
+  div.card.mb-3
+    div.card-body  
+      h2.text-center.mb-0 The Freedom To Have FUN!
