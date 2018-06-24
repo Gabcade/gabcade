@@ -36,11 +36,11 @@ As the root user, please install the global Node.js management requirements:
 
 As root:
 
-    adduser rob
+    adduser gabcade
 
-As rob:
+As gabcade:
 
-    su - rob
+    su - gabcade
     ssh-keygen
     [add ~/.ssh/id_rsa.pub to github]
 
@@ -48,9 +48,9 @@ As root:
 
     cd /opt
     mkdir site
-    chown -R rob:rob site
+    chown -R gabcade:gabcade site
 
-As rob:
+As gabcade:
 
     vi ~/.bashrc
       export NODE_ENV="production"
