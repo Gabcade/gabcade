@@ -19,27 +19,35 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/:gameSlug', (req, res/*, next*/) => {
-  var viewModel = {
-    slug: req.params.gameSlug,
-    title: 'NUCLEOID',
-    engineFile: '78586924f8856bbad7e15767a691574a.js',
-    configFile: '650ffa3f67fee8162f343ecb428f691c.json'
-  };
-  switch (req.params.gameSlug) {
-    case 'nucleoid':
-      res.render('game/unity-player', viewModel);
-      break;
-    case 'gabber':
-      res.render('game/gabber', viewModel);
-      break;
-    case 'gaboom':
-      res.render('game/gaboom', viewModel);
-      break;
-    case 'icann-command':
-      res.render('game/icann-command', viewModel);
-      break;
+router.param('slug', (req, res, next, slug) => {
+  Game
+  .findOne({ slug: slug })
+  .populate('team')
+  .then((game) => {
+    res.locals.game = game;
+    next();
+  })
+  .catch(next);
+});
+
+router.get('/:slug', (req, res, next) => {
+  var viewModel = { };
+  if (!res.locals.game.stats) {
+    res.locals.game.stats = { };
   }
+  res.locals.game.stats.impressions += 1;
+  res.locals.game
+  .save()
+  .then((game) => {
+    viewModel.game = game;
+    console.log(game);
+    switch (game.technology) {
+      case 'U3':
+        res.render('game/unity-player', viewModel);
+        break;
+    }
+  })
+  .catch(next);
 });
 
 router.get('/', (req, res, next) => {

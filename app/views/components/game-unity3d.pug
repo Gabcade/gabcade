@@ -9,7 +9,7 @@ mixin renderUnityGame (game)
     div.col-lg-4
       div.card
         div.card-header
-          a(href="/games/nucleoid")
+          a(href=`/games/${game.slug}`)
             h4.text-center= game.title
         
         a(href=`/games/${game.slug}`).btn.btn-info PLAY NOW!

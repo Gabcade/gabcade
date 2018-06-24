@@ -4,12 +4,12 @@ block gametitle
   title NUCLEOID
 
 block gamecss
-  //- link(rel="shortcut icon", href=`/builds/${slug}/TemplateData/favicon.ico`)
-  link(rel="stylesheet", href=`/builds/${slug}/TemplateData/style.css`)
+  //- link(rel="shortcut icon", href=`/builds/${game.slug}/TemplateData/favicon.ico`)
+  link(rel="stylesheet", href=`/builds/style.css`)
 
 block gamejs
-  script(src=`/builds/${slug}/TemplateData/UnityProgress.js`)
-  script(src=`/builds/${slug}/Build/${engineFile}`)
+  script(src=`/builds/${game.slug}/TemplateData/UnityProgress.js`)
+  script(src=`/builds/${game.slug}/Build/${game.unity3d.engineFile}`)
 
 block content
   div.webgl-content.mb-3
@@ -17,10 +17,13 @@ block content
   div.text-center
     button(onclick="gameInstance.SetFullscreen(1)").btn.btn-default.btn-sm fullscreen
 
+  div
+    pre= JSON.stringify(game, null, 2)
+
   script.
     var gameInstance = UnityLoader.instantiate(
       "gameContainer",
-      `/builds/!{slug}/Build/!{configFile}`
+      `/builds/!{game.slug}/Build/!{game.unity3d.configFile}`
     );
     // Unity, for whatever reason, sets margin:0 on gameContainer.
     // That's not happening.

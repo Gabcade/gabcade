@@ -133,26 +133,13 @@ router.post('/game/:gameId', (req, res, next) => {
   res.locals.game.title = req.body.title;
   res.locals.game.headline = req.body.headline;
   res.locals.game.description = req.body.description;
+  res.locals.game.unity3d.configFile = req.body.configFile;
+  res.locals.game.unity3d.engineFile = req.body.engineFile;
   res.locals.game.tags = req.body.tags.split(' ');
   res.locals.game
   .save()
   .then((game) => {
     res.locals.game = game;
-    res.redirect(`/admin/game/${game._id}`);
-  })
-  .catch(next);
-});
-
-router.post('/game', (req, res, next) => {
-  Game.create({
-    slug: req.body.slug,
-    technology: req.body.technology,
-    title: req.body.title,
-    headline: req.body.headline,
-    description: req.body.description,
-    tags: req.body.tags.split(' ')
-  })
-  .then((game) => {
     res.redirect(`/admin/game/${game._id}`);
   })
   .catch(next);
@@ -170,6 +157,23 @@ router.get('/game/:gameId', (req, res, next) => {
     }
     viewModel.game = game;
     res.render('admin/game-edit', viewModel);
+  })
+  .catch(next);
+});
+
+router.post('/game', (req, res, next) => {
+  Game.create({
+    slug: req.body.slug,
+    technology: req.body.technology,
+    title: req.body.title,
+    headline: req.body.headline,
+    description: req.body.description,
+    'unity3d.configFile': req.body.configFile,
+    'unity3d.engineFile': req.body.engineFile,
+    tags: req.body.tags.split(' ')
+  })
+  .then((game) => {
+    res.redirect(`/admin/game/${game._id}`);
   })
   .catch(next);
 });

@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "MAGA Casino Slots",
+"dataUrl": "01fa1c8ee0ee654ef332607078c367e4.unityweb",
+"asmCodeUrl": "db0f5d182a3d1578a828c612e4e13102.unityweb",
+"asmMemoryUrl": "2c06d057cb7ac1deb1024b81cecc0199.unityweb",
+"asmFrameworkUrl": "2fb83418b1e0758e475621942c54e99f.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}

@@ -4,7 +4,7 @@ block content
   form(method="POST", action=`/admin/game/${game._id}`)
     div.card
       div.card-header
-        h4 CREATE NEW GAME
+        h4 Update game
 
       div.card-body
         div.row
@@ -32,6 +32,14 @@ block content
         div.form-group
           label(for="description") Description
           textarea(id="description", name="description", rows="6", placeholder="Enter game description").form-control= game.description
+
+        div.form-group
+          label(for="configFile") Unity3D config filename
+          input(id="configFile", name="configFile", type="text", placeholder="Enter Unity3D configuration filename", value= game.unity3d.configFile).form-control
+
+        div.form-group
+          label(for="engineFile") Unity3D engine filename
+          input(id="engineFile", name="engineFile", type="text", placeholder="Enter Unity3D engine filename", value= game.unity3d.engineFile).form-control
 
         div.form-group.mb-0
           label(for="credits") Tags (separate with spaces)

@@ -1,2 +1,5 @@
 User-Agent: *
+Disallow: /user/login
+Disallow: /user/signup
+Disallow: /user/logout
 Allow: /

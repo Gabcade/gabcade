@@ -18,6 +18,7 @@ const GameSchema = new Schema({
   description: { type: String, required: true },
   tags: { type: [String] },
   stats: {
+    impressions: { type: Number, default: 0 },
     plays: { type: Number, default: 0 }
   },
   images: {
@@ -25,6 +26,10 @@ const GameSchema = new Schema({
     card: { type: Schema.ObjectId, ref: 'Image' },      //  960 x 540
     profile: { type: Schema.ObjectId, ref: 'Image' },   //  256 x 256
     icon: { type: Schema.ObjectId, ref: 'Image' }       //   32 x  32
+  },
+  unity3d: {
+    engineFile: { type: String },
+    configFile: { type: String }
   }
 });
 
