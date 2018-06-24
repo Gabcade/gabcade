@@ -1,0 +1,7 @@
+mixin renderBlogArticle (article)
+  div.card
+    div.card-header
+      a(href=`/blog/${article.slug}`)
+        h4= article.title
+    div.card-body!= markdown.toHTML(article.content)
+    div.card-footer= moment(article.created).fromNow()

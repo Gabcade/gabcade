@@ -1,0 +1,30 @@
+extends ../layout
+block content
+
+  form(method="POST", action="/blog")
+    div.card.my-3
+      div.card-header
+        h1 New blog article
+      div.card-body.mb-0
+        div.form-group
+          label(for="title") Title
+          input(id="title", name="title", type="text", placeholder="Enter article title", oninput="return updateGameSlug(event);").form-control
+        div.form-group
+          label(for="slug") URL slug
+          input(id="slug", name="slug", type="text", placeholder="Enter article URL slug").form-control
+        div.form-group.mb-0
+          label(for="content") Article text
+          textarea(id="content", name="content", rows="12", placeholder="Enter article text").form-control
+          small.form-text.text-muted Markdown syntax supported.
+      div.card-footer
+        button(type="submit").btn.btn-primary Create article
+
+  script.
+    var title = document.getElementById('title');
+    var slug = document.getElementById('slug');
+
+    function updateGameSlug (event) {
+      event.preventDefault();
+      slug.value = title.value.toLowerCase().replace(/ /g, '-');
+      return true;
+    }

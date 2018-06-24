@@ -1,0 +1,9 @@
+extends ../layout
+block content
+
+  div.card
+    div.card-header
+      h1= article.title
+    div.card-body!= markdown.toHTML(article.content)
+    div.card-footer
+      small= moment(article.created).fromNow()

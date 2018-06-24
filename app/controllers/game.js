@@ -86,6 +86,7 @@ router.get('/', (req, res, next) => {
   };
   Game
   .find()
+  .sort({ title: 1 })
   .limit(10)
   .then((games) => {
     viewModel.games = games;

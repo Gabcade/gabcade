@@ -1,0 +1,22 @@
+extends ../layout
+block content
+
+  include ../components/blog-article
+
+  div.card.my-3
+    div.card-header
+      div.row
+        div.col-10
+          h1 gabcade.com blog
+        div.col-2.text-right
+          a(href="/blog/compose")
+            i.fas.fa-plus
+
+    div.card-body
+      p Welcome to the Gabcade blog. We post various writeups here about new games, new technology at the site, events that we'll be hosting, new publishers that join the platform and more.
+
+  if !articles || !articles.length
+    p.lead There are no articles.
+  else
+    each article in articles
+      +renderBlogArticle (article)

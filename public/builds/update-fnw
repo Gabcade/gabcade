@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -Rf fake-news-wars
+cp -R /home/rob/Public/Fake\ News\ Wars/Builds/HTML5/fake-news-wars .

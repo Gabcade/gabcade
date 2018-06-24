@@ -53,7 +53,6 @@ router.get('/:gameId', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   var viewModel = { };
-  console.log('ANNOUNCEMENTS');
   Announcement
   .find()
   .sort({ created: -1 })
