@@ -6,7 +6,8 @@ block content
 
   img(src=`/img/game-cards/${game.slug}.jpg`).responsive
 
-  +renderCommentComposer ('Game', game._id)
+  if user
+    +renderCommentComposer ('Game', game._id)
 
   div.card.my-3
     div.card-header
