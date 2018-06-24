@@ -126,8 +126,23 @@ img.site-brand {
  * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
  * License: MIT
  */
-div.jumbotron div.card {
+div.jumbotron,
+div.card {
   background-color: #595959;
+  color: #c8c8c8;
+}
+div.jumbotron h1,
+div.card h1,
+div.jumbotron h2,
+div.card h2,
+div.jumbotron h3,
+div.card h3,
+div.jumbotron h4,
+div.card h4,
+div.jumbotron h5,
+div.card h5,
+div.jumbotron h6,
+div.card h6 {
   color: #c8c8c8;
 }
 /*
