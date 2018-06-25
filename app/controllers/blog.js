@@ -26,6 +26,54 @@ router.get('/compose', (req, res, next) => {
   res.render('blog/compose');
 });
 
+router.get('/:slug/edit', (req, res, next) => {
+  var viewModel = { };
+  if (!req.user || (!req.user.flags.isAdmin)) {
+    return next(
+      new Error('Must be logged in as administrator to edit blog articles.')
+    );
+  }
+  Article
+  .findOne({ slug: req.params.slug })
+  .populate('author')
+  .then((article) => {
+    viewModel.article = article;
+    res.render('blog/article-edit', viewModel);
+  })
+  .catch(next);
+});
+
+router.get('/:articleId/delete', (req, res, next) => {
+  Article
+  .remove({ _id: req.params.articleId })
+  .then(( ) => {
+    res.redirect('/blog');
+  })
+  .catch(next);
+});
+
+router.post('/:slug', (req, res, next) => {
+  if (!req.user || !req.user.flags.isAdmin) {
+    return next(new Error('Must be logged in as an administrator to edit blog articles.'));
+  }
+  Article
+  .findOneAndUpdate(
+    { slug: req.params.slug },
+    {
+      $set: {
+        slug: req.body.slug,
+        title: req.body.title,
+        content: req.body.content
+      }
+    },
+    { new: true }
+  )
+  .then(( ) => {
+    res.redirect(`/blog/${req.params.slug}`);
+  })
+  .catch(next);
+});
+
 router.get('/:slug', (req, res, next) => {
   var viewModel = { };
   Article

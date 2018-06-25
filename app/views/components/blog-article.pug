@@ -1,7 +1,19 @@
-mixin renderBlogArticle (article)
+mixin renderBlogArticle (article, truncateLength = false)
   div.card.mb-3
     div.card-header
-      a(href=`/blog/${article.slug}`)
-        h4= article.title
-    div.card-body.blog-article!= markdown.toHTML(article.content)
+      if user && user.flags.isAdmin
+        div.row
+          div.col-9
+            a(href=`/blog/${article.slug}`)
+              h4= article.title
+          div.col-3.text-right
+            a(href=`/blog/${article.slug}/edit`).btn.btn-default.btn-sm.mr-3 EDIT
+            a(href=`/blog/${article._id}/delete`).btn.btn-default.btn-sm DELETE
+      else
+        a(href=`/blog/${article.slug}`)
+          h4= article.title
+    if (truncateLength)
+      div(class= bodyClass).card-body.blog-article!= markdown.toHTML(truncateText(article.content, truncateLength))
+    else
+      div(class= bodyClass).card-body.blog-article!= markdown.toHTML(article.content)
     div.card-footer= moment(article.created).fromNow()

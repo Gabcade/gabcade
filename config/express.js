@@ -64,6 +64,24 @@ module.exports = (app, config) => {
     res.locals.numeral = numeral;
     res.locals.moment = moment;
     res.locals.markdown = markdown;
+    /*
+     * truncateText
+     * Accepts a body of text from the template and possibly truncates it. If
+     * so, it will append an ellipsis. CSS should do this, but I guess that's
+     * hard.
+     */
+    res.locals.truncateText = (text, maxWords) => {
+      var out = [ ];
+      var words = text.split(' ');
+      while (words.length && (out.length < maxWords)) {
+        out.push(words.shift());
+      }
+      if (out.length === maxWords) {
+        return out.join(' ') + '...';
+      }
+      return out.join(' ');
+    };
+
     next();
   });
 

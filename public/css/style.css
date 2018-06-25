@@ -43,6 +43,21 @@ div.card div.card-body.blog-article img {
   width: 100%;
   height: auto;
 }
+div.card div.card-body.blog-article.article-summary {
+  max-height: 8em;
+  overflow: auto;
+}
+/*
+ * footer.less
+ * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
+ * License: MIT
+ */
+div.footer {
+  border-top: solid 1px #5e5e5e;
+}
+div.footer div.footer-block {
+  text-align: center;
+}
 /*
  * footer-hashtags.less
  * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
