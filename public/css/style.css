@@ -38,6 +38,11 @@ div.card div.card-body.game-description {
   max-height: 245px;
   overflow-y: auto;
 }
+div.card div.card-body.blog-article img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /*
  * footer-hashtags.less
  * Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
