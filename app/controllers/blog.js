@@ -19,6 +19,13 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get('/compose', (req, res, next) => {
+  if (!req.user || !req.user.flags.isAdmin) {
+    return next(new Error('Must be logged in as an administrator to post blog articles.'));
+  }
+  res.render('blog/compose');
+});
+
 router.get('/:slug', (req, res, next) => {
   var viewModel = { };
   Article
@@ -29,13 +36,6 @@ router.get('/:slug', (req, res, next) => {
     res.render('blog/article', viewModel);
   })
   .catch(next);
-});
-
-router.get('/compose', (req, res, next) => {
-  if (!req.user || !req.user.flags.isAdmin) {
-    return next(new Error('Must be logged in as an administrator to post blog articles.'));
-  }
-  res.render('blog/compose');
 });
 
 router.post('/', (req, res, next) => {
