@@ -1,7 +1,9 @@
-mixin renderCommentComposer (subjectType, subjectId)
+mixin renderCommentComposer (subjectType, subject)
   form(method="POST", action="/comment").mb-0
     input(type="hidden", name="subjectType", value= subjectType)
-    input(type="hidden", name="subject", value= subjectId)
+    input(type="hidden", name="subject", value= subject._id)
+    if (subject.slug)
+      input(type="hidden", name="slug", value= subject.slug)
     div.card.my-3
       div.card-header
         h4 Enter comment

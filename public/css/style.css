@@ -129,6 +129,10 @@ img.profile {
   height: 32px;
   width: auto;
 }
+img.profile.small {
+  height: 24px;
+  width: auto;
+}
 img.home-brand {
   display: block;
   max-width: 256px;

@@ -1,5 +1,21 @@
 extends ../layout
 block content
 
+  include ../components/comment
+  include ../components/comment-composer
+
   include ../components/blog-article
   +renderBlogArticle (article)
+
+  if user
+    +renderCommentComposer ('Article', article)
+
+  div.card.my-3
+    div.card-header
+      h4 Comments
+    div.card-body
+      if !comments || !comments.length
+        p There are no comments about #{article.title}.
+      else
+        each comment in comments
+          +renderComment(comment)

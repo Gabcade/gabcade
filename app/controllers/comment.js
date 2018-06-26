@@ -35,6 +35,8 @@ router.post('/', (req, res, next) => {
     switch (comment.subjectType) {
       case 'Game':
         return res.redirect(`/game/${comment.subject}/discuss`);
+      case 'Article':
+        return res.redirect(`/blog/${req.body.slug.toLowerCase()}`);
       case 'User':
         return res.redirect(`/user/${comment.subject}/discuss`);
     }

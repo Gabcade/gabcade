@@ -9,6 +9,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Article = mongoose.model('Article');
+const Comment = mongoose.model('Comment');
 
 module.exports = (app) => {
   app.use('/blog', router);
@@ -81,6 +82,15 @@ router.get('/:slug', (req, res, next) => {
   .populate('author')
   .then((article) => {
     viewModel.article = article;
+    return Comment
+    .find({ subject: article._id })
+    .sort({ created: -1 })
+    .limit(20)
+    .populate('subject')
+    .populate('author');
+  })
+  .then((comments) => {
+    viewModel.comments = comments;
     res.render('blog/article', viewModel);
   })
   .catch(next);

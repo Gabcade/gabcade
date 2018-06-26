@@ -1,11 +1,11 @@
 mixin renderComment (comment)
-  div.card
+  div.card.mb-3
     div.card-header.small
       div.row
         div.col-5
           a(href=`/user/${comment.author.username}`)= comment.author.username
         div.col-2.text-center
-          img(src="/img/profile-default.png").responsive
+          img(src="/img/profile-default.png").profile
         div.col-5.text-right
           a(href=`/game/${comment.subject.slug}`)= comment.subject.title
     div.card-body
