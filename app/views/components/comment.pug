@@ -5,7 +5,10 @@ mixin renderComment (comment)
         div.col-5
           a(href=`/user/${comment.author.username}`)= comment.author.username
         div.col-2.text-center
-          img(src="/img/profile-default.png").profile
+          if (comment.author.proSubscription && comment.author.proSubscription.isSubscribed)
+            img(src="/img/gabcade-pro-icon.png").profile.small
+          else
+            img(src="/img/profile-default.png").profile.small
         div.col-5.text-right
           a(href=`/game/${comment.subject.slug}`)= comment.subject.title
     div.card-body

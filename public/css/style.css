@@ -133,6 +133,10 @@ img.profile.small {
   height: 24px;
   width: auto;
 }
+img.profile.large {
+  height: 64px;
+  width: auto;
+}
 img.home-brand {
   display: block;
   max-width: 256px;
@@ -168,6 +172,46 @@ div.card h5,
 div.jumbotron h6,
 div.card h6 {
   color: #c8c8c8;
+}
+div.jumbotron {
+  position: relative;
+}
+div.jumbotron div.marketing-burst {
+  width: 60%;
+  padding: 8px;
+  margin: 0 auto;
+  background-color: #e8e81a;
+  color: #1a1a1a;
+  border-radius: 6px;
+}
+div.jumbotron div.marketing-burst div.marketing-cta {
+  font-size: 2em;
+  font-weight: bold;
+}
+div.jumbotron div.marketing-burst div.marketing-cost {
+  font-size: 1.2em;
+}
+div.jumbotron div.marketing-burst div.marketing-cost span.price {
+  font-weight: bold;
+}
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
 /*
  * links.less

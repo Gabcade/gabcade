@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const StripeStrategy = require('passport-stripe').Strategy;
 
 const User = mongoose.model('User');
 const Comment = mongoose.model('Comment'); // jshint ignore:line
@@ -49,6 +50,9 @@ class UserController extends OpusService {
     router.post('/login', self.login.bind(self));
     router.post('/:username', self.updateUser.bind(self));
     router.post('/', self.createUser.bind(self));
+
+    router.get('/stripe/connect', passport.authenticate('stripe'));
+    router.get('/stripe/callback', self.onStripeCallback.bind(self));
 
     router.get('/signup', self.getUserSignupForm.bind(self));
     router.get('/login', self.getLoginForm.bind(self));
@@ -195,6 +199,20 @@ class UserController extends OpusService {
     });
   }
 
+  onStripeCallback (req, res, next) {
+    passport.authenticate('stripe', { }, (err, stripeUser) => {
+      req.user.stripe.customerId = stripeUser.id;
+      req.user.stripe.accessToken = stripeUser.accessToken;
+      req.user.stripe.refreshToken = stripeUser.refreshToken;
+      req.user
+      .save()
+      .then(( ) => {
+        res.redirect('/stripe/subscribe');
+      })
+      .catch(next);
+    })(req, res, next);
+  }
+
   login (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
@@ -277,6 +295,7 @@ module.exports = (app, config) => {
   controller.geoip2.init(dbpath);
 
   passport.serializeUser(function (user, done) {
+    console.log('Passport.serializeUser', user);
     done(null, user._id || user.id);
   });
 
@@ -307,4 +326,25 @@ module.exports = (app, config) => {
       return done(null, user);
     });
   }));
+
+  console.log('registering PassportJS Stripe strategy');
+  passport.use(new StripeStrategy({
+      clientID: process.env.STRIPE_CLIENT_ID,
+      clientSecret: process.env.STRIPE_SECRET_KEY,
+      callbackUrl: config.stripe.callbackUrl
+    },
+    function (accessToken, refreshToken, stripe_properties, done) {
+      console.log('STRIPE', {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        properties: stripe_properties
+      });
+      done(null, {
+        id: stripe_properties.stripe_user_id,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        properties: stripe_properties
+      });
+    }
+  ));
 };

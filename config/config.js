@@ -13,6 +13,11 @@ const config = {
       name: 'gabcade-local',
       slogan: 'Fun With Freedom #PlayFreely'
     },
+    stripe: {
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      secretKey: process.env.STRIPE_SECRET_KEY,
+      callbackUrl: 'http://localhost:3000/user/stripe/callback'
+    },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-local',
     redis: {
@@ -72,6 +77,10 @@ const config = {
     app: {
       name: 'gabcade-development',
       slogan: 'Fun With Freedom #PlayFreely'
+    },
+    stripe: {
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      secretKey: process.env.STRIPE_SECRET_KEY
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-development',
@@ -135,6 +144,10 @@ const config = {
       name: 'gabcade-test',
       slogan: 'Fun With Freedom #PlayFreely'
     },
+    stripe: {
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      secretKey: process.env.STRIPE_SECRET_KEY
+    },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-test',
     redis: {
@@ -196,6 +209,10 @@ const config = {
     app: {
       name: 'gabcade',
       slogan: 'Fun With Freedom #PlayFreely'
+    },
+    stripe: {
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      secretKey: process.env.STRIPE_SECRET_KEY
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-production',

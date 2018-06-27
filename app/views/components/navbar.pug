@@ -23,7 +23,10 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.mb-3
         ul.navbar-nav
           li(class= currentView === 'profile' ? 'active' : null).nav-item.d-none.d-md-block
             a(href=`/user/${user.username}`).nav-link
-              img(src='/img/profile-default.png').profile
+              if (user.proSubscription && user.proSubscription.isSubscribed)
+                img(src='/img/gabcade-pro-icon.png').profile
+              else
+                img(src='/img/profile-default.png').profile
         ul.navbar-nav
           li(class= currentView === 'profile' ? 'active' : null).nav-item
             a(href=`/user/${user.username}`).nav-link.profile= user.username
