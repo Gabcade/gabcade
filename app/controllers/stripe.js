@@ -33,6 +33,9 @@ router.get('/get-started', (req, res, next) => {
   if (!req.user) {
     return next(new Error('You must be logged in to continue.'));
   }
+  if (req.user.proSubscription && req.user.proSubscription.isSubscribed) {
+    return next(new Error('You are already subscribed to Gabcade.com. Thank you!'));
+  }
   res.render('stripe/get-started');
 });
 
@@ -46,6 +49,9 @@ router.get('/thank-you', (req, res, next) => {
 router.get('/subscribe', (req, res, next) => {
   if (!req.user) {
     return next(new Error('You must be logged in to continue.'));
+  }
+  if (req.user.proSubscription && req.user.proSubscription.isSubscribed) {
+    return next(new Error('You are already subscribed to Gabcade.com. Thank you!'));
   }
   res.render('stripe/subscribe');
 });

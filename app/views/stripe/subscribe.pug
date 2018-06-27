@@ -10,6 +10,8 @@ block content
           label(for="card-element") Credit or debit card
           div(id="card-element")
           div(id="card-errors", role="alert")
+          small.form-text.text-muted Payment processing by #[a(href="https://stripe.com/") Stripe].
+
         div.form-group
           label(for="plan") Select subscription
           select(id="plan", name="plan").form-control

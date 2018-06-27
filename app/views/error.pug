@@ -2,8 +2,7 @@ extends layout
 
 block content
   h1= message
-  h2= error.status
-
-  div.card
-    div.card-body  
-      pre #{error.stack}
+  if (error.stack)
+    div.card
+      div.card-body  
+        pre #{error.stack}
