@@ -298,7 +298,6 @@ module.exports = (app, config) => {
   controller.geoip2.init(dbpath);
 
   passport.serializeUser(function (user, done) {
-    console.log('Passport.serializeUser', user);
     done(null, user._id || user.id);
   });
 
@@ -337,11 +336,6 @@ module.exports = (app, config) => {
       callbackUrl: config.stripe.callbackUrl
     },
     function (accessToken, refreshToken, stripe_properties, done) {
-      console.log('STRIPE', {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        properties: stripe_properties
-      });
       done(null, {
         id: stripe_properties.stripe_user_id,
         accessToken: accessToken,
