@@ -13,7 +13,6 @@ class OpusService {
 
   maskPassword (salt, password) {
     const hash = crypto.createHash('sha256');
-    console.log({ systemSalt: this.config.passwordSalt, userSalt: salt });
     hash.update(this.config.passwordSalt);
     hash.update(salt);
     hash.update(password);
