@@ -68,13 +68,16 @@ class UserController extends OpusService {
     var self = this;
     
     if (!req.body.email || (typeof req.body.email !== 'string') || (req.body.email.length <= 0)) {
-      return res.status(500).json({ error: 'Must include an email address.' });
+      return next(new Error('Must include an email address.'));
     }
     if (!req.body.username || (typeof req.body.username !== 'string') || (req.body.username.length <= 0)) {
-      return res.status(500).json({ error: 'Must include a username' });
+      return next(new Error('Must include a username'));
+    }
+    if (!req.body.username.match(/^[a-zA-Z0-9 "!?-]+$/)) {
+      return next(new Error('Username contains invalid characters or spaces'));
     }
     if (!req.body.password || (typeof req.body.password !== 'string') || (req.body.password.length <= 0)) {
-      return res.status(500).json({ error: 'Must include a password' });
+      return next(new Error('Must include a password'));
     }
 
     req.body.passwordSalt = uuidv4();
