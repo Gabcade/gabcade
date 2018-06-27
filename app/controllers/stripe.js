@@ -30,14 +30,23 @@ router.get('/charges/list', (req, res, next) => {
 });
 
 router.get('/get-started', (req, res) => {
+  if (!req.user) {
+    return new Error('You must be logged in to continue.');
+  }
   res.render('stripe/get-started');
 });
 
 router.get('/thank-you', (req, res) => {
+  if (!req.user) {
+    return new Error('You must be logged in to continue.');
+  }
   res.render('stripe/thank-you');
 });
 
 router.get('/subscribe', (req, res) => {
+  if (!req.user) {
+    return new Error('You must be logged in to continue.');
+  }
   res.render('stripe/subscribe');
 });
 
