@@ -1,0 +1,25 @@
+extends ../layout
+block content
+  
+  div.jumbotron
+    div.w-50.mx-auto
+      div.row
+        div.col-lg-4.col-sm-3
+        div.col-lg-4.col-sm-6
+          img(src="/img/gabcade-pro-icon.png", alt="Gabcade Pro Icon").responsive
+        div.col-lg-4.col-sm-3
+      
+      h1.text-center Thank you!
+    
+      p.lead You have just subscribed to Gabcade.com! As we go forward and you maintain your subscription in good standing, you will:
+    
+      div.my-3
+        ul
+          li Never see an advertisement - we won't need them!
+          li Have access to all games to play as much as you want
+          li Help us fund the development of new games
+          li Create new jobs for people everywhere
+          li Make game developers' lives better
+
+      div.text-center
+        a(href=`/user/${user.username_lc}`).btn.btn-primary Return to profile

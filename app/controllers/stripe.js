@@ -33,6 +33,10 @@ router.get('/get-started', (req, res) => {
   res.render('stripe/get-started');
 });
 
+router.get('/thank-you', (req, res) => {
+  res.render('stripe/thank-you');
+});
+
 router.get('/subscribe', (req, res) => {
   res.render('stripe/subscribe');
 });
@@ -69,7 +73,7 @@ router.post('/subscription/create', (req, res, next) => {
     return req.user.save();
   })
   .then(( ) => {
-    res.status(200).json({ subscription: viewModel.subscription });
+    res.redirect(`/user/${req.user.username_lc}`);
   })
   .catch(next);
 });
