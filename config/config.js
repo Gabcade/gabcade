@@ -16,7 +16,11 @@ const config = {
     stripe: {
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
       secretKey: process.env.STRIPE_SECRET_KEY,
-      callbackUrl: 'http://localhost:3000/user/stripe/callback'
+      callbackUrl: 'http://localhost:3000/user/stripe/callback',
+      plans: {
+        monthly: 'plan_D7nAD3yCsfJwWh',
+        yearly: 'plan_D7oXzmy4QGn5GJ'
+      }
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-local',
@@ -80,7 +84,12 @@ const config = {
     },
     stripe: {
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      secretKey: process.env.STRIPE_SECRET_KEY
+      secretKey: process.env.STRIPE_SECRET_KEY,
+      callbackUrl: 'http://dev.gabcade.com/user/stripe/callback',
+      plans: {
+        monthly: 'plan_D7nAD3yCsfJwWh',
+        yearly: 'plan_D7oXzmy4QGn5GJ'
+      }
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-development',
@@ -146,7 +155,12 @@ const config = {
     },
     stripe: {
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      secretKey: process.env.STRIPE_SECRET_KEY
+      secretKey: process.env.STRIPE_SECRET_KEY,
+      callbackUrl: 'https://test.gabcade.com/user/stripe/callback',
+      plans: {
+        monthly: 'plan_D7nAD3yCsfJwWh',
+        yearly: 'plan_D7oXzmy4QGn5GJ'
+      }
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-test',
@@ -212,7 +226,12 @@ const config = {
     },
     stripe: {
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      secretKey: process.env.STRIPE_SECRET_KEY
+      secretKey: process.env.STRIPE_SECRET_KEY,
+      callbackUrl: 'https://gabcade.com/user/stripe/callback',
+      plans: {
+        monthly: 'plan_D7mmcXyoYAcqlG',
+        yearly: 'plan_D7yY11tGbFQstY'
+      }
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gabcade-production',
