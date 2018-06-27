@@ -39,6 +39,10 @@ router.get('/get-started', (req, res, next) => {
   res.render('stripe/get-started');
 });
 
+router.get('/redirect', (req, res) => {
+  res.render('stripe/redirect');
+});
+
 router.get('/thank-you', (req, res, next) => {
   if (!req.user) {
     return next(new Error('You must be logged in to continue.'));
@@ -88,14 +92,17 @@ router.post('/subscription/create', (req, res, next) => {
     return req.user.save();
   })
   .then(( ) => {
-    res.redirect(`/user/${req.user.username_lc}`);
+    res.redirect('/stripe/thank-you');
   })
   .catch(next);
 });
 
 router.post('/webhook', (req, res) => {
   StripeWebhook
-  .create({ data: req.body })
+  .create({
+    type: req.body.type,
+    data: req.body
+  })
   .then(( ) => {
     res.status(200).end();
   })

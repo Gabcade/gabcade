@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 
 const StripeWebhookSchema = new Schema({
   created: { type: Date, default: Date.now, required: true, index: -1 },
+  type: { type: String, required: true, index: true },
   data: { type: Schema.Types.Mixed }
 });
 
