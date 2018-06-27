@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -Rf gabber2
+cp -R /home/rob/Public/Gabber\ 2/Builds/HTML5/gabber2 .
+rm -f ./gabber2/index.html
