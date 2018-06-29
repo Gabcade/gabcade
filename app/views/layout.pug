@@ -52,6 +52,11 @@ html(lang='en')
           if user
             ul.nav.flex-column
               li.nav-item
+                if (!user.proSubscription || !user.proSubscription.isSubscribed)
+                  a(href="/stripe/get-started").nav-link Upgrade to Pro
+                else
+                  span.nav-link Gabcade Pro
+              li.nav-item
                 a(href=`/user/${user.username_lc}/edit`).nav-link edit profile
             hr
             ul.nav.flex-column
