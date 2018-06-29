@@ -1,0 +1,7 @@
+account.application.authorized
+account.application.deauthorized
+
+customer.subscription.updated
+customer.subscription.deleted
+customer.subscription.trial_will_end
+customer.subscription.updated
