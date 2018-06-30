@@ -4,9 +4,16 @@ block content
   form(method="POST", action=`/admin/game/${game._id}`)
     div.card
       div.card-header
-        h4 Update game
-
+        h1 Update game
       div.card-body
+        div.row.mb-3
+          div.col
+            div Auth Token: 
+            div.font-weight-bold= game.authToken
+          div.col
+            div Access Token: 
+            div.font-weight-bold= game.accessToken
+
         div.row
           div.col-lg-6
             div.form-group

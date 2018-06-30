@@ -6,6 +6,7 @@
 
 const express = require('express');
 const router = express.Router();
+const uuidv4 = require('uuid/v4');
 
 const mongoose = require('mongoose');
 
@@ -14,6 +15,8 @@ const GameDevTeam = mongoose.model('GameDevTeam');
 const GameDevStudio = mongoose.model('GameDevStudio');
 const GameDevCompany = mongoose.model('GameDevCompany');
 const Game = mongoose.model('Game');
+
+const User = mongoose.model('User');
 
 module.exports = (app) => {
   app.use('/admin', router);
@@ -163,6 +166,8 @@ router.get('/game/:gameId', (req, res, next) => {
 
 router.post('/game', (req, res, next) => {
   Game.create({
+    authToken: uuidv4(),
+    accessToken: uuidv4(),
     slug: req.body.slug,
     technology: req.body.technology,
     title: req.body.title,
@@ -182,7 +187,7 @@ router.get('/game', (req, res) => {
   res.render('admin/game-create');
 });
 
-router.get('/', (req, res, next) => {
+router.get('/game-management', (req, res, next) => {
   var viewModel = { };
   Game
   .find()
@@ -190,6 +195,21 @@ router.get('/', (req, res, next) => {
   .populate('team')
   .then((games) => {
     viewModel.games = games;
+    res.render('admin/game-management', viewModel);
+  })
+  .catch(next);
+});
+
+router.get('/', (req, res, next) => {
+  var viewModel = { };
+  Game
+  .count()
+  .then((gameCount) => {
+    viewModel.gameCount = gameCount;
+    return User.count();
+  })
+  .then((userCount) => {
+    viewModel.userCount = userCount;
     res.render('admin/index', viewModel);
   })
   .catch(next);

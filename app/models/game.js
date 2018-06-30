@@ -10,6 +10,8 @@ const Schema = mongoose.Schema;
 const GameSchema = new Schema({
   created: { type: Date, required: true, default: Date.now, index: -1 },
   updated: { type: Date, index: -1 },
+  authToken: { type: String, required: true, index: true },
+  accessToken: { type: String, required: true, index: true },
   team: { type: Schema.ObjectId, index: true, ref: 'GameDevTeam' },
   slug: { type: String, required: true, index: true, lowercase: true, unique: true },
   technology: { type: String, enum: ['U3', 'H5', 'GM'], required: true, index: true },
@@ -18,8 +20,9 @@ const GameSchema = new Schema({
   description: { type: String, required: true },
   tags: { type: [String] },
   stats: {
-    impressions: { type: Number, default: 0 },          // on site, recurring
-    plays: { type: Number, default: 0 }                 // in game, recurring
+    impressions: { type: Number, default: 0, required: true },
+    players: { type: Number, default: 0, required: true },
+    plays: { type: Number, default: 0, required: true }
   },
   images: {
     header: { type: Schema.ObjectId, ref: 'Image' },    // 1024 x 256

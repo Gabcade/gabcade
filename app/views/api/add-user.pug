@@ -1,0 +1,26 @@
+extends ../layout
+block content
+
+  form(method="POST", action=`/api/game/${game.slug}/add-user`)
+    div.card.my-3
+      div.card-header
+        h1 Game permission request
+      div.card-body
+        div.row
+          div.col
+            p.lead You are granting user permissions to #[strong= game.title].
+            p #{game.title} will be able to:
+            ul
+              li Post your scores to the leaderboards
+              li Grant player profile achievements and badges
+              li Write to your profile wall
+
+            p Eventually, #{game.title} may be able to post gabs to Gab.ai on your behalf. This will require additional permission to be granted by you at that time. The game will #[em not] post to Gab.ai on your behalf at this time.
+
+            p.lead #{game.title} will #[u not] be able to see your email address, password, or any other information about you on Gabcade.com or from Gab.ai.
+          div.col
+            div
+              img(src=`/img/game-cards/${game.slug}.jpg`).responsive
+      div.card-footer
+        button(type="submit").btn.btn-primary.mr-3 Grant permission
+        a(href=`/`).btn.btn-default.mr-3 Cancel

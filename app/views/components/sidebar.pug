@@ -1,0 +1,28 @@
+div(id="sidebar-menu").sidebar-menu.closed
+  div.card
+    div.card-header
+      div.row
+        div.col-10
+          if (!user.proSubscription || !user.proSubscription.isSubscribed)
+            h4.mb-0 Gabcade
+          else
+            h4.mb-0 Gabcade Pro
+
+        div.col-2
+          i(onclick="return toggleSideMenu(event);").fas.fa-times
+  
+    div.card-body
+      if user
+        ul.nav.flex-column
+          li.nav-item
+            if (!user.proSubscription || !user.proSubscription.isSubscribed)
+              a(href="/stripe/get-started").nav-link upgrade to pro
+          li.nav-item
+            a(href=`/user/${user.username_lc}/edit`).nav-link edit profile
+        hr
+        ul.nav.flex-column
+          li.nav-item
+            a(href="/user/logout").nav-link logout
+          if (user.flags.isAdmin)
+            li.nav-item
+              a(href="/admin").nav-link admin

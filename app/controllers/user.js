@@ -169,7 +169,9 @@ class UserController extends OpusService {
   }
 
   getUserSignupForm (req, res) {
-    res.render('user/signup');
+    var viewModel = { };
+    viewModel.game = req.query.game;
+    res.render('user/signup', viewModel);
   }
 
   getLoginForm (req, res) {

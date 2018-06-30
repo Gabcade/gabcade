@@ -10,6 +10,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Game = mongoose.model('Game');
+const GamePlayer = mongoose.model('GamePlayer');
 const Comment = mongoose.model('Comment'); // jshint ignore:line
 const Impression = mongoose.model('Impression');
 
@@ -48,17 +49,24 @@ router.get('/:slug/discuss', (req, res, next) => {
   .catch(next);
 });
 
-router.get('/:slug', (req, res, next) => {
+router.get('/:slug/player', (req, res, next) => {
   var viewModel = { };
-  if (!res.locals.game.stats) {
-    res.locals.game.stats = { };
+  if (!req.user) {
+    return res.redirect(`/user/signup?game=${req.params.slug}`);
   }
-
-  Impression
-  .create({
-    subjectType: 'Game',
-    subject: res.locals.game._id,
-    user: req.user
+  GamePlayer
+  .find({
+    game: res.locals.game._id,
+    user: req.user._id
+  })
+  .then((gamePlayer) => {
+    viewModel.gamePlayer = gamePlayer;
+    return Impression
+    .create({
+      subjectType: 'Game',
+      subject: res.locals.game._id,
+      user: req.user
+    });
   })
   .then((impression) => {
     viewModel.impression = impression;
@@ -71,11 +79,30 @@ router.get('/:slug', (req, res, next) => {
   })
   .then((game) => {
     viewModel.game = game;
+
     switch (game.technology) {
       case 'U3':
         res.render('game/unity-player', viewModel);
         break;
     }
+  })
+  .catch(next);
+});
+
+router.get('/:slug', (req, res, next) => {
+  if (!req.user) {
+    return res.redirect(`/user/signup?game=${req.params.slug}`);
+  }
+  GamePlayer
+  .findOne({
+    game: res.locals.game._id,
+    user: req.user._id
+  })
+  .then((gamePlayer) => {
+    if (!gamePlayer) {
+      return res.redirect(`/api/game/${res.locals.game.slug}/add-user`);
+    }
+    return res.redirect(`/game/${res.locals.game.slug}/player`);
   })
   .catch(next);
 });

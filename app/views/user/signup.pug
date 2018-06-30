@@ -1,16 +1,26 @@
 extends ../layout
 block content
-  h1 New User Signup
-  p Please enter your username, password, and phone number. A code will be sent to your phone, and you must enter that code to complete registration.
-  form(method="POST", action="/user")
-    div.form-group
-      label(for="email") #[strong email address]
-      input(id="email", name="email", type="email", placeholder="Enter email address", autocomplete="email").form-control
-    div.form-group
-      label(for="username") #[strong username]
-      input(id="username", name="username", type="text", placeholder="Enter username", autocomplete="username").form-control
-    div.form-group
-      label(for="password") #[strong password]
-      input(id="password", name="password", type="password", placeholder="Enter password", autocomplete="new-password").form-control
-    div.form-group
-      button(type="submit").btn.btn-primary CREATE ACCOUNT
+  
+  div.card
+    div.card-header
+      h2 New User Signup
+    div.card-body
+      div.row
+        div(class= game ? 'col-7' : 'col-12')
+          form(method="POST", action="/user")
+            if game
+              input(type="hidden", name="game", value= game)
+            div.form-group
+              label(for="email") #[strong email address]
+              input(id="email", name="email", type="email", placeholder="Enter email address", autocomplete="email").form-control
+            div.form-group
+              label(for="username") #[strong username]
+              input(id="username", name="username", type="text", placeholder="Enter username", autocomplete="username").form-control
+            div.form-group
+              label(for="password") #[strong password]
+              input(id="password", name="password", type="password", placeholder="Enter password", autocomplete="new-password").form-control
+            div.form-group
+              button(type="submit").btn.btn-primary Create free account
+        if game
+          div.col-5
+            img(src=`/img/game-cards/${game}.jpg`).responsive

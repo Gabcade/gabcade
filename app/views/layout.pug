@@ -11,12 +11,6 @@ html(lang='en')
       link(rel='stylesheet', href='/css/style.css')
     block gamecss
     block js
-      script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-      script.
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-5865185341985206",
-          enable_page_level_ads: true
-        });
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
     block gamejs
@@ -39,32 +33,7 @@ html(lang='en')
         div.footer-block.my-1
           | Made In America by Citizens
 
-    div(id="sidebar-menu").sidebar-menu.closed
-      div.card
-        div.card-header
-          div.row
-            div.col-10
-              h4.mb-0 Site Menu
-            div.col-2
-              i(onclick="return toggleSideMenu(event);").fas.fa-times
-      
-        div.card-body
-          if user
-            ul.nav.flex-column
-              li.nav-item
-                if (!user.proSubscription || !user.proSubscription.isSubscribed)
-                  a(href="/stripe/get-started").nav-link Upgrade to Pro
-                else
-                  span.nav-link Gabcade Pro
-              li.nav-item
-                a(href=`/user/${user.username_lc}/edit`).nav-link edit profile
-            hr
-            ul.nav.flex-column
-              li.nav-item
-                a(href="/user/logout").nav-link logout
-              if (user.flags.isAdmin)
-                li.nav-item
-                  a(href="/admin").nav-link admin
+    include components/sidebar
 
     block scripts
       script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js", integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", crossorigin="anonymous")

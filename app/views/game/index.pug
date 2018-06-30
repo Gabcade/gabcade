@@ -3,12 +3,13 @@ block content
 
   include ../components/game-unity3d
 
-  each game in games
-    case game.technology
-      when 'U3'
-        +renderUnityGame(game)
-      when 'H5'
-        +renderHtml5Game(game)
-      when 'GM'
-        +renderGameMakerGame(game)
-    hr
+  div.row
+    each game in games
+      div.col-4
+        case game.technology
+          when 'U3'
+            +renderUnityGame(game)
+          when 'H5'
+            +renderHtml5Game(game)
+          when 'GM'
+            +renderGameMakerGame(game)
