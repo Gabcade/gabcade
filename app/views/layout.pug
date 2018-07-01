@@ -40,11 +40,11 @@ html(lang='en')
       script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js", integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", crossorigin="anonymous")
       script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js", integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T", crossorigin="anonymous")
 
-      script(src="/js/opus-resource.js", integrity="sha384-nP+5fJ6TxfzyenjR56HXXRQaFmcXz2aveT1vwKdCg+9DNb9moNMtkQ6nCYRUbqQ+", crossorigin="anonymous")
+      script(src="/js/gabcade-resource.js", integrity="sha384-nP+5fJ6TxfzyenjR56HXXRQaFmcXz2aveT1vwKdCg+9DNb9moNMtkQ6nCYRUbqQ+", crossorigin="anonymous")
 
       script.
         $('#gdpr-alert').on('closed.bs.alert', ( ) => {
-          var resource = new opus.OpusResource();
+          var resource = new gabcade.GabcadeResource();
           resource.post('/user/dismiss-alert/gdpr');
         });
 

@@ -2,6 +2,8 @@
 // Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
 // License: MIT
 
+'use strict';
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

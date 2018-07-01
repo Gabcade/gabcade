@@ -1,14 +1,13 @@
-// opus-resource.js
+// gabcade-resource.js
 // Copyright (C) 2017 Pontemedium, LLC
 // All Rights Reserved
-
 
 (function ( ) {
 'use strict';
 
-var opus = window.opus = window.opus || { };
+var gabcade = window.gabcade = window.gabcade || { };
 
-class OpusResource {
+class GabcadeResource {
 
   constructor (name, options) {
     this.name = name || 'Resource';
@@ -231,6 +230,6 @@ class OpusResource {
   }
 }
 
-opus.OpusResource = OpusResource;
+gabcade.GabcadeResource = GabcadeResource;
 
 })();

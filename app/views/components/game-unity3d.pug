@@ -2,7 +2,7 @@ mixin renderUnityGame (game)
   div.card.mb-3
     div.card-header
       a(href=`/game/${game.slug}`)
-        h4.text-center= game.title
+        h4.text-center.mb-0= game.title
     a(href=`/game/${game.slug}`)
       img(src=`/img/game-cards/${game.slug}.jpg`).responsive
     a(href=`/game/${game.slug}`).btn.btn-info PLAY NOW!

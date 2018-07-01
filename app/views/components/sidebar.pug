@@ -3,7 +3,7 @@ div(id="sidebar-menu").sidebar-menu.closed
     div.card-header
       div.row
         div.col-10
-          if (!user.proSubscription || !user.proSubscription.isSubscribed)
+          if (!user || !user.proSubscription || !user.proSubscription.isSubscribed)
             h4.mb-0 Gabcade
           else
             h4.mb-0 Gabcade Pro
@@ -15,7 +15,7 @@ div(id="sidebar-menu").sidebar-menu.closed
       if user
         ul.nav.flex-column
           li.nav-item
-            if (!user.proSubscription || !user.proSubscription.isSubscribed)
+            if (user && (!user.proSubscription || !user.proSubscription.isSubscribed))
               a(href="/stripe/get-started").nav-link upgrade to pro
           li.nav-item
             a(href=`/user/${user.username_lc}/edit`).nav-link edit profile

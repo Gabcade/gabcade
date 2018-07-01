@@ -5,7 +5,7 @@ block content
 
   div.row
     each game in games
-      div.col-4
+      div.col-md-6.col-xl-4
         case game.technology
           when 'U3'
             +renderUnityGame(game)

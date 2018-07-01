@@ -17,10 +17,10 @@ const StripeStrategy = require('passport-stripe').Strategy;
 const User = mongoose.model('User');
 const Comment = mongoose.model('Comment'); // jshint ignore:line
 
-const OpusService = require('../opus-service');
+const GabcadeService = require('../gabcade-service');
 const uuidv4 = require('uuid/v4');
 
-class UserController extends OpusService {
+class UserController extends GabcadeService {
 
   constructor (app, config) {
     super(app, config);

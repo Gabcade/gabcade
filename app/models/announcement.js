@@ -21,7 +21,6 @@ const AnnouncementSchema = new Schema({
     index: true
   },
   owner: { type: Schema.ObjectId, index: true, refPath: 'ownerType' },
-  game: { type: Schema.ObjectId, ref: 'Game' },
   title: { type: String, required: true },
   content: { type: String, required: true },
   flags: {
