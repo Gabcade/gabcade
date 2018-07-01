@@ -1,0 +1,15 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Gabber 2",
+"dataUrl": "d8a331b270de653ea8f3ad1bc053c089.unityweb",
+"wasmCodeUrl": "1c8960921b9143725a5de152bbe8116c.unityweb",
+"wasmFrameworkUrl": "aa4b21011ff3b1b504d001158c6ed6da.unityweb",
+"asmCodeUrl": "f6648c13124168798a750c48b0c58ca5.unityweb",
+"asmMemoryUrl": "5a2d10646cf01df14fddaf6c56efbe44.unityweb",
+"asmFrameworkUrl": "73cf0d87fa848696e19e9272adae54cf.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
