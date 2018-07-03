@@ -1,0 +1,16 @@
+{
+"companyName": "pontemedium llc",
+"productName": "Fake News WARS",
+"dataUrl": "daad186b9050b09efe7869deed2ff7d3.unityweb",
+"wasmCodeUrl": "f5b2bf0770a97ae366ebe1ea404619a7.unityweb",
+"wasmFrameworkUrl": "4bc7dd91d8ecb2afcd53ff5db3b85ccb.unityweb",
+"asmCodeUrl": "0f7ca5ba11f075932ff65a51748e655a.unityweb",
+"asmMemoryUrl": "9a00d6602e4479049a6aef8e74ea769c.unityweb",
+"asmFrameworkUrl": "4de8078712cf709e45520c7561a2c56a.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"backgroundUrl": "df5862d7a1ec7905c62e41bbc1c02abf.jpg",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#FFFFFF"
+}
