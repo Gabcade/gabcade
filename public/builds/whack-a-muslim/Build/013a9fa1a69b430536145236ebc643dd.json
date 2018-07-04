@@ -1,0 +1,15 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Whack A Muslim",
+"dataUrl": "8f75e2424526a5472d345180f3e74b61.unityweb",
+"wasmCodeUrl": "fedf80cb6aa808eaf8cf26da6d90fbd9.unityweb",
+"wasmFrameworkUrl": "f89036ad6cd98dd16b290c483e40d640.unityweb",
+"asmCodeUrl": "3f155a3e985aacaf267d1a76a300b1b8.unityweb",
+"asmMemoryUrl": "4a50e534afa9c726364282f6d8b18924.unityweb",
+"asmFrameworkUrl": "32600f2ba7bef20825431360d06ddbde.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
