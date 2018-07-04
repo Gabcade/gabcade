@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -Rf whack-a-muslim
+cp -R /home/rob/Public/Projects/Whack-a-Muslim/Builds/HTML5/whack-a-muslim .
+rm -f ./whack-a-muslim/index.html
