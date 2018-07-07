@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -Rf gaboom
+cp -R /home/rob/Public/Projects/gaboom/Builds/HTML5/gaboom .
+rm -f ./gaboom/index.html
