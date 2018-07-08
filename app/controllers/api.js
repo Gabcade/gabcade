@@ -37,6 +37,9 @@ router.post('/authorize', (req, res, next) => {
   Game
   .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
   .then((game) => {
+    if (!game) {
+      return Promise.reject(new GabcadeError(403, 'Invalid access token'));
+    }
     viewModel.game = game;
     return GamePlayer
     .findOne({
@@ -279,15 +282,18 @@ router.get('/game/announcements', (req, res) => {
   var viewModel = { };
   Game
   .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
-  .select('title')
+  .select('title headline')
   .then((game) => {
     if (!game) {
       return Promise.reject(new GabcadeError(403, 'Invalid game access token'));
     }
     viewModel.game = game;
     return Announcement
-    .find({ game: game._id })
-    .populate('owner');
+    .find({ owner: game._id })
+    .select('-owner -ownerType')
+    .sort({ created: -1 })
+    .limit(10)
+    .lean();
   })
   .then((announcements) => {
     viewModel.announcements = announcements;
