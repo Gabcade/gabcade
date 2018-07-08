@@ -94,6 +94,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.post('/game/start', (req, res) => {
+  var viewModel = { };
   console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
   console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
   console.log('request', req.body);
@@ -103,9 +104,17 @@ router.post('/game/start', (req, res) => {
     if (!game) {
       return Promise.reject(new GabcadeError(403, 'Invalid game access token'));
     }
+    viewModel.game = game;
+    return Game
+    .update(
+      { _id: game._id },
+      { $inc: { 'stats.plays': 1 }
+    });
+  })
+  .then(( ) => {
     return GameInstance
     .create({
-      game: game._id,
+      game: viewModel.game._id,
       user: req.user._id,
       startParams: req.body.startParams,
       note: req.body.note
