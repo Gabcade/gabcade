@@ -1,0 +1,28 @@
+extends ../../layout
+block content
+  div.jumbotron
+    h1= game.title
+    p.large= game.headline
+    a(href=`/admin/game/${game._id}/edit`).btn.btn-primary Edit game
+
+  div.card
+    div.card-header Game Instances
+    div.card-body
+      if !instances || !instances.length
+        p There are no game instances at this time.
+      else
+        div.row.font-weight-bold.mb-2
+          div.col Created
+          div.col Player
+          div.col State
+          div.col StartP
+          div.col Note
+          div.col Score
+        each instance in instances
+          div.row.mb-1
+            div.col= moment(instance.created).format('HH:MM:ss')
+            div.col= instance.user.username
+            div.col= instance.state
+            div.col= instance.startParams
+            div.col= instance.note
+            div.col= instance.score ? numeral(instance.score).format('0,0') : 'pending'

@@ -14,7 +14,13 @@ const GamePlayer = mongoose.model('GamePlayer');
 const Comment = mongoose.model('Comment'); // jshint ignore:line
 const Impression = mongoose.model('Impression');
 
-module.exports = (app) => {
+const GabcadeError = require('../gabcade-error');
+const GabcadeService = require('../gabcade-service');
+
+module.exports = (app, config) => {
+  module.app = app;
+  module.config = config;
+  module.service = new GabcadeService(app, config);
   app.use('/game', router);
 };
 
@@ -30,6 +36,49 @@ router.param('slug', (req, res, next, slug) => {
   .then((game) => {
     res.locals.game = game;
     next();
+  })
+  .catch(next);
+});
+
+router.post('/:slug/add-user', (req, res,next) => {
+  var viewModel = { };
+  Game
+  .findOne({ slug: req.params.slug })
+  .select('title')
+  .then((game) => {
+    if (!game) {
+      return Promise.reject(
+        new GabcadeError(404, 'The selected game does not exist.')
+      );
+    }
+    viewModel.game = game;
+    return GamePlayer
+    .create({
+      game: game._id,
+      user: req.user._id
+    });
+  })
+  .then(( ) => {
+    return Game.update(
+      { _id: viewModel.game._id },
+      { $inc: { 'stats.players': 1 } }
+    );
+  })
+  .then(( ) => {
+    res.redirect(`/game/${req.params.slug}/player`);
+  })
+  .catch(next);
+});
+
+router.get('/:slug/add-user', (req, res, next) => {
+  var viewModel = { };
+  Game
+  .findOne({ slug: req.params.slug })
+  .select('-authToken -accessToken')
+  .populate('user')
+  .then((game) => {
+    viewModel.game = game;
+    res.render('game/add-user', viewModel);
   })
   .catch(next);
 });
@@ -100,7 +149,7 @@ router.get('/:slug', (req, res, next) => {
   })
   .then((gamePlayer) => {
     if (!gamePlayer) {
-      return res.redirect(`/api/game/${res.locals.game.slug}/add-user`);
+      return res.redirect(`/game/${res.locals.game.slug}/add-user`);
     }
     return res.redirect(`/game/${res.locals.game.slug}/player`);
   })

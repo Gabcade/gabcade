@@ -6,12 +6,15 @@
 
 const express = require('express');
 const router = express.Router();
+// const uuidv4 = require('uuid/v4');
 
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const Announcement = mongoose.model('Announcement');
 const Game = mongoose.model('Game');
 const GamePlayer = mongoose.model('GamePlayer');
+const GameInstance = mongoose.model('GameInstance');
 const GameScore = mongoose.model('GameScore');
 
 const GabcadeError = require('../gabcade-error');
@@ -24,64 +27,222 @@ module.exports = (app, config) => {
   app.use('/api', router);
 };
 
-router.post('/game/:slug/add-user', (req, res,next) => {
+router.post('/authorize', (req, res, next) => {
   var viewModel = { };
+  if (!req.user) {
+    return next(new GabcadeError(403, 'Must have valid Gabcade session to authorize client'));
+  }
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
   Game
-  .findOne({ slug: req.params.slug })
-  .select('title')
+  .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
   .then((game) => {
-    if (!game) {
-      return Promise.reject(
-        new GabcadeError(404, 'The selected game does not exist.')
-      );
-    }
     viewModel.game = game;
     return GamePlayer
-    .create({
+    .findOne({
       game: game._id,
       user: req.user._id
     });
   })
-  .then(( ) => {
-    return Game.update(
-      { _id: viewModel.game._id },
-      { $inc: { 'stats.players': 1 } }
-    );
+  .then((player) => {
+    if (!player) {
+      return Promise.reject(new GabcadeError(403, 'Player has not authorized the game.'));
+    }
+    return res.status(200).json({
+      userId: req.user._id,
+      username: req.user.username
+    });
   })
-  .then(( ) => {
-    res.redirect(`/game/${req.params.slug}/player`);
-  })
-  .catch(next);
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
 });
 
-router.post('/game/:slug/score', (req, res, next) => {
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(new Error(info.message));
+    }
+    req.login(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      user.lastLogin = new Date(Date.now());
+      user
+      .save()
+      .then(( ) => {
+        return res.status(200).json({
+          userId: user._id,
+          username: user.username
+        });
+      });
+    });
+  })(req, res, next);
+});
+
+router.post('/logout', (req, res) => {
+  req.logout();
+  res.status(200).json({ message: 'Session ended successfully.' });
+});
+
+router.post('/game/start', (req, res) => {
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
+  console.log('request', req.body);
   Game
-  .findOne({ slug: req.params.slug })
-  .select('title')
+  .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
   .then((game) => {
     if (!game) {
-      return Promise.reject(new GabcadeError(
-        404,
-        'The selected game does not exist.'
-      ));
+      return Promise.reject(new GabcadeError(403, 'Invalid game access token'));
     }
-    return GameScore
+    return GameInstance
     .create({
       game: game._id,
       user: req.user._id,
-      score: req.body.score
+      startParams: req.body.startParams,
+      note: req.body.note
+    });
+  })
+  .then((gameInstance) => {
+    res.status(200).json({
+      created: gameInstance.created,
+      instanceId: gameInstance._id,
+      startParams: gameInstance.startParams,
+      note: gameInstance.note
+    });
+  })
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
+});
+
+router.post('/game/:instanceId/status', (req, res) => {
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
+  GameInstance
+  .findById(req.params.instanceId)
+  .then((gameInstance) => {
+    if (!gameInstance) {
+      return Promise.reject(new GabcadeError(404, 'Invalid game instance'));
+    }
+    if (gameInstance.user.toString() !== req.user._id.toString()) {
+      return Promise.reject(new GabcadeError(403, 'Game instance belongs to another player'));
+    }
+    gameInstance.note = req.body.note;
+    gameInstance.score = req.body.score;
+    return gameInstance.save();
+  })
+  .then(( ) => {
+    res.status(200).json({ message: 'Game update accepted' });
+  })
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
+});
+
+router.post('/game/:instanceId/achievement', (req, res) => {
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
+  GameInstance
+  .findById(req.params.instanceId)
+  .then((gameInstance) => {
+    if (!gameInstance) {
+      return Promise.reject(new GabcadeError(404, 'Invalid game instance'));
+    }
+    if (gameInstance.user !== req.user._id) {
+      return Promise.reject(new GabcadeError(403, 'Game instance belongs to another user'));
+    }
+    gameInstance.achievements.push({
+      name: req.body.achievement
+    });
+    return gameInstance.save();
+  })
+  .then(( ) => {
+    res.status(200).json({ message: 'Game achievement accepted' });
+  })
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
+});
+
+router.post('/game/:instanceId/abort', (req, res) => {
+  var viewModel = { };
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
+  GameInstance
+  .findById(req.params.instanceId)
+  .then((gameInstance) => {
+    if (!gameInstance) {
+      return Promise.reject(new GabcadeError(404, 'Invalid game instance'));
+    }
+    if (gameInstance.user !== req.user._id) {
+      return Promise.reject(new GabcadeError(403, 'Game instance belongs to another user'));
+    }
+    gameInstance.state = 'aborted';
+    return gameInstance.save();
+  })
+  .then((gameInstance) => {
+    viewModel.gameInstance = gameInstance;
+    res.status(200).json(viewModel);
+  })
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
+});
+
+router.post('/game/:instanceId/finish', (req, res) => {
+  var viewModel = { };
+  console.log('X-Gabcade-AccessToken', req.get('X-Gabcade-AccessToken'));
+  console.log('X-Gabcade-HMAC', req.get('X-Gabcade-HMAC'));
+  GameInstance
+  .findById(req.params.instanceId)
+  .then((gameInstance) => {
+    if (!gameInstance) {
+      return Promise.reject(new GabcadeError(404, 'The game instance does not exist.'));
+    }
+    if (gameInstance.user.toString() !== req.user._id.toString()) {
+      return Promise.reject(new GabcadeError(403, 'Game instance belongs to another user'));
+    }
+    gameInstance.state = 'finished';
+    gameInstance.note = req.body.note;
+    gameInstance.score = req.body.score;
+    return gameInstance.save();
+  })
+  .then((gameInstance) => {
+    viewModel.gameInstance = gameInstance;
+    return GameScore
+    .create({
+      created: gameInstance.created,
+      game: gameInstance.game,
+      user: req.user._id,
+      score: req.body.score,
+      note: req.body.note
     });
   })
   .then(( ) => {
-    res.status(200).json({
-      code: 200,
-      message: 'Score processed'
-    });
+    res.status(200).json({ message: 'Game finish report accepted' });
   })
-  .catch(next);
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
 });
 
-router.get('/game/:slug/leaderboard', (req, res, next) => {
+router.get('/game/leaderboard', (req, res, next) => {
   var viewModel = { };
   if (!req.query.p) {
     req.query.p = 1;
@@ -90,14 +251,11 @@ router.get('/game/:slug/leaderboard', (req, res, next) => {
     req.query.cpp = 10;
   }
   Game
-  .findOne({ slug: req.params.slug })
-  .select('title')
+  .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
+  .select('title headline')
   .then((game) => {
     if (!game) {
-      return new Promise.reject(new GabcadeError(
-        404,
-        'The selected game does not exist'
-      ));
+      return new Promise.reject(new GabcadeError(403, 'Invalid game access token'));
     }
     viewModel.game = game;
     return GameScore
@@ -117,16 +275,14 @@ router.get('/game/:slug/leaderboard', (req, res, next) => {
   .catch(next);
 });
 
-router.get('/game/:slug/announcements', (req, res, next) => {
+router.get('/game/announcements', (req, res) => {
   var viewModel = { };
   Game
-  .findOne({ slug: req.params.slug })
+  .findOne({ accessToken: req.get('X-Gabcade-AccessToken') })
   .select('title')
   .then((game) => {
     if (!game) {
-      return Promise.reject(new GabcadeError(
-        404, 'The selected game does not exist'
-      ));
+      return Promise.reject(new GabcadeError(403, 'Invalid game access token'));
     }
     viewModel.game = game;
     return Announcement
@@ -137,18 +293,9 @@ router.get('/game/:slug/announcements', (req, res, next) => {
     viewModel.announcements = announcements;
     res.status(200).json(viewModel);
   })
-  .catch(next);
-});
-
-router.get('/game/:slug/add-user', (req, res, next) => {
-  var viewModel = { };
-  Game
-  .findOne({ slug: req.params.slug })
-  .select('-authToken -accessToken')
-  .populate('user')
-  .then((game) => {
-    viewModel.game = game;
-    res.render('api/add-user', viewModel);
-  })
-  .catch(next);
+  .catch((error) => {
+    res
+    .status(error.code || error.statusCode || 500)
+    .json(error);
+  });
 });

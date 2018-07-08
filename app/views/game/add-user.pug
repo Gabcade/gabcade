@@ -1,7 +1,7 @@
 extends ../layout
 block content
 
-  form(method="POST", action=`/api/game/${game.slug}/add-user`)
+  form(method="POST", action=`/game/${game.slug}/add-user`)
     div.card.my-3
       div.card-header
         h1 Game permission request

@@ -14,6 +14,7 @@ const GameDeveloper = mongoose.model('GameDeveloper');
 const GameDevTeam = mongoose.model('GameDevTeam');
 const GameDevStudio = mongoose.model('GameDevStudio');
 const GameDevCompany = mongoose.model('GameDevCompany');
+const GameInstance = mongoose.model('GameInstance');
 const Game = mongoose.model('Game');
 
 const User = mongoose.model('User');
@@ -130,6 +131,22 @@ router.get('/game-developer', (req, res, next) => {
  * GAME
  */
 
+router.get('/game/:gameId/edit', (req, res, next) => {
+  var viewModel = { };
+  Game
+  .findById(req.params.gameId)
+  .then((game) => {
+    if (!game) {
+      return Promise.reject(
+        new Error('The selected game does not exist.')
+      );
+    }
+    viewModel.game = game;
+    res.render('admin/game/edit', viewModel);
+  })
+  .catch(next);
+});
+
 router.post('/game/:gameId', (req, res, next) => {
   res.locals.game.slug = req.body.slug;
   res.locals.game.technology = req.body.technology;
@@ -159,7 +176,16 @@ router.get('/game/:gameId', (req, res, next) => {
       );
     }
     viewModel.game = game;
-    res.render('admin/game-edit', viewModel);
+    return GameInstance
+    .find({ game: game._id })
+    .sort({ created: -1 })
+    .limit(25)
+    .populate('user')
+    .lean();
+  })
+  .then((instances) => {
+    viewModel.instances = instances;
+    res.render('admin/game/view', viewModel);
   })
   .catch(next);
 });

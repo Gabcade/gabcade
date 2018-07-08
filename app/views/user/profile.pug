@@ -19,22 +19,54 @@ block content
           h1= profile.username
           if profile && profile.bio
             p.lead!= markdown.toHTML(profile.bio)
-    
-    // div.card-body
-    //   p.lead This is where a user's recent public game activity will go. This will include game results, achievements and more.
+    if gameInstance
+      div.card-body
+        div.row.font-weight-bold
+          div.col Game
+          div.col Note
+          div.col Score
+          div.col Started
+        div.row
+          div.col
+            a(href=`/game/${gameInstance.game.slug}`)= gameInstance.game.title
+          div.col= gameInstance.note
+          div.col= numeral(gameInstance.score).format('0,0')
+          div.col= moment(gameInstance.created).fromNow()
     
   div.row
     div.col-lg-8
-      h3 Recent game results
-      p This space is reserved for recent game results played while logged in.
+      div.card.mb-3
+        div.card-header
+          h4.mb-0 Recent game results
+        div.card-body
+          div.row.font-weight-bold.mb-2
+            div.col Game
+            div.col Started
+            div.col Finished
+            div.col Note
+            div.col Score
+          each score in gameScores
+            div.row.mb-1
+              div.col
+                a(href=`/game/${score.game.slug}`)= score.game.title
+              div.col= moment(score.created).fromNow()
+              div.col= moment(score.finished).fromNow()
+              div.col= score.note
+              div.col= numeral(score.score).format('0,0')
 
     div.col-lg-4
-      h3 Recent achievements
-      p This space is reserved for recent achievements earned in-game.
+      div.card.mb-3
+        div.card-header
+          h4.mb-0 Recent achievements
+        div.card-body
+          p.mb-0 This space is reserved for recent achievements earned in-game.
 
-      h3 Recent comments
-      if !comments || !comments.length
-        p #{profile.username} hasn't posted any comments, yet. You know how to encourage them!
-      else
-        each comment in comments
-          +renderComment (comment)
+      div.card.mb-3
+        div.card-header
+          h4.mb-0 Recent comments
+        div.card-body
+          if !comments || !comments.length
+            p #{profile.username} hasn't posted any comments, yet. You know how to encourage them!
+          else
+            each comment in comments
+              +renderComment (comment)

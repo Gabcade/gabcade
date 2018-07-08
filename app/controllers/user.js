@@ -17,6 +17,9 @@ const StripeStrategy = require('passport-stripe').Strategy;
 const User = mongoose.model('User');
 const Comment = mongoose.model('Comment'); // jshint ignore:line
 
+const GameInstance = mongoose.model('GameInstance');
+const GameScore = mongoose.model('GameScore');
+
 const GabcadeService = require('../gabcade-service');
 const uuidv4 = require('uuid/v4');
 
@@ -263,14 +266,36 @@ class UserController extends GabcadeService {
     .then((user) => {
       viewModel.profile = user;
       return Comment
-      .find({ author: user._id })
+      .find({ author: viewModel.profile._id })
       .sort({ created: -1 })
       .limit(10)
       .populate('subject')
-      .populate('author');
+      .populate('author')
+      .lean();
     })
     .then((comments) => {
       viewModel.comments = comments;
+      return GameScore
+      .find({ user: viewModel.profile._id})
+      .sort({ finished: -1 })
+      .limit(10)
+      .populate('game')
+      .lean();
+    })
+    .then((gameScores) => {
+      viewModel.gameScores = gameScores;
+      return GameInstance
+      .findOne({
+        state: 'pending',
+        user: req.user._id
+      })
+      .sort({ created: -1 })
+      .limit(1)
+      .populate('game')
+      .lean();
+    })
+    .then((gameInstance) => {
+      viewModel.gameInstance = gameInstance;
       res.render('user/profile', viewModel);
     })
     .catch(next);
