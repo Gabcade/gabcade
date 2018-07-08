@@ -1,3 +1,4 @@
 #!/bin/bash
 git pull origin master
 forever restartall
+forever logs 0 -f
