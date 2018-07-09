@@ -1,0 +1,17 @@
+extends ../layout
+block main
+  div.container-fluid.mb-3
+    block content
+      div.row
+        div.col-3.col-lg-2
+          div.card.mb-3
+            div.card-header
+              h4.my-0 Site Admin
+            div.card-body
+              div.nav.nav-pills.flex-column
+                a(href="/admin", class= adminView === 'dashboard' ? 'active' : undefined).nav-link Dashboard
+                a(href="/admin/game-management", class= adminView === 'tradelog' ? 'active' : undefined).nav-link Games
+                a(href="/admin/user", class= adminView === 'user' ? 'active' : undefined).nav-link Users
+
+        div.col-9.col-lg-10
+          block admin-content

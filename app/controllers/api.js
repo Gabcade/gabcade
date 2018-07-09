@@ -69,11 +69,13 @@ router.post('/login', (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return next(new Error(info.message));
+      return res.status(404).json({ message: info.message });
     }
     req.login(user, function (err) {
       if (err) {
-        return next(err);
+        return res.status(err.code || err.statusCode || 500).json({
+          message: info.message
+        });
       }
       user.lastLogin = new Date(Date.now());
       user
@@ -235,13 +237,18 @@ router.post('/game/:instanceId/finish', (req, res) => {
   })
   .then((gameInstance) => {
     viewModel.gameInstance = gameInstance;
+
+    var now = new Date(Date.now());
+    var minutesPlayed = (now - gameInstance.created) / 1000.0 / 60.0;
     return GameScore
     .create({
       created: gameInstance.created,
+      finished: new Date(Date.now()),
       game: gameInstance.game,
       user: req.user._id,
       score: req.body.score,
-      note: req.body.note
+      note: req.body.note,
+      minutesPlayed: minutesPlayed
     });
   })
   .then(( ) => {

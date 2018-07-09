@@ -1,0 +1,15 @@
+{
+"companyName": "Gabcade.com",
+"productName": "GABOOM!",
+"dataUrl": "5daabd2cdd8897a586401ca622b92af3.unityweb",
+"wasmCodeUrl": "dd67c39d6ef83d53432e5e3eaed42461.unityweb",
+"wasmFrameworkUrl": "01c97b2066249c3c9fec3d6434e41861.unityweb",
+"asmCodeUrl": "ab9db6f89915bec8aa1557f626e1354f.unityweb",
+"asmMemoryUrl": "136f2b56338839686c8bf175d4796a0a.unityweb",
+"asmFrameworkUrl": "79217bfd0fbe0277964d14c2dc74a2ad.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}

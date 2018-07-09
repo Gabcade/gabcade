@@ -19,10 +19,11 @@ html(lang='en')
 
     include components/navbar
 
-    div.container.mb-3
-      if (user && !user.flags.isGdprDismissed)
-        include components/gdpr-notice
-      block content
+    block main
+      div.container.mb-3
+        if (user && !user.flags.isGdprDismissed)
+          include components/gdpr-notice
+        block content
 
     div.container.small
       div.footer
@@ -31,7 +32,7 @@ html(lang='en')
           br
           | License: MIT
         div.footer-block.my-1
-          | Made In America by Citizens
+          | Made In USA by Citizens
 
     include components/sidebar
 
@@ -53,3 +54,5 @@ html(lang='en')
           e.classList.toggle('closed');
           return true;
         }
+
+    block viewjs

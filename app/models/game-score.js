@@ -13,7 +13,8 @@ const GameScoreSchema = new Schema({
   game: { type: Schema.ObjectId, required: true, index: true, ref: 'Game' },
   user: { type: Schema.ObjectId, required: true, index: true, ref: 'User' },
   score: { type: Number, required: true, index: -1 },
-  note: { type: String }
+  note: { type: String },
+  minutesPlayed: { type: Number }
 });
 
 /*

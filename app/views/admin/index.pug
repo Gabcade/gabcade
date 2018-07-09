@@ -1,17 +1,64 @@
-extends ../layout
-block content
+extends layout
+block admin-content
   div.jumbotron
-    div.row
-      div.col-9
-        h1 Admin Dashboard
+    h1 Admin Dashboard
 
-  div.row
-    div.col-3
-      ul.nav.flex-column
-        li.nav-item
-          a(href='/admin/game-management').nav-link Games
-        li.nav-item
-          a(href='/admin/user-management').nav-link Users
+  div.card
+    div.card-header
+      h4.mb-0 Game Utilization
+    canvas(id="hourly-games-played", height="360")
 
-    div.col-9
-      p The admin dashboard graphs will go here.
+block viewjs
+  script(src="/moment/moment.min.js")
+  script(src="/chart/Chart.min.js")
+  script.
+    var resource = new gabcade.GabcadeResource();
+    resource
+    .fetch('/admin/graph/plays-per-hour')
+    .then((graphData) => {
+      var ctx = document.getElementById('hourly-games-played').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: 'Games',
+            borderColor: 'rgb(128,64,64)',
+            backgroundColor: 'rgba(128,64,64,0.2)',
+            data: graphData.response.graphData.map((element) => {
+              return {
+                x: element.date,
+                y: element.count
+              };
+            })
+          }, {
+            label: 'Minutes Played',
+            borderColor: 'rgb(128,128,64)',
+            backgroundColor: 'rgba(128,128,64,0.2)',
+            data: graphData.response.graphData.map((element) => {
+              return {
+                x: element.date,
+                y: element.minutesPlayed
+              };
+            })
+          }]
+        },
+        options: {
+          scales: {
+            xAxes: [{
+              type: 'time',
+              distribution: 'linear',
+              time: {
+                unit: 'hour',
+                displayFormats: {
+                  hour: 'h:mm a'
+                }
+              }
+            }]
+          }
+        }
+      });
+      console.log(graphData);
+    })
+    .catch((error) => {
+      console.error(error);
+    });

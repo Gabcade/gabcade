@@ -1,10 +1,10 @@
-extends ../layout
-block content
+extends layout
+block admin-content
   div.jumbotron
-    div.row
-      div.col-9
-        h1 Game Management
-      div.col-3
+    div.row.align-items-center
+      div.col
+        h1.mb-0 Game Management
+      div.col-auto
         a(href="/admin/game").btn.btn-primary ADD GAME
 
   div.row.mb-2.font-weight-bold

@@ -7,6 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const uuidv4 = require('uuid/v4');
+const moment = require('moment');
 
 const mongoose = require('mongoose');
 
@@ -15,6 +16,7 @@ const GameDevTeam = mongoose.model('GameDevTeam');
 const GameDevStudio = mongoose.model('GameDevStudio');
 const GameDevCompany = mongoose.model('GameDevCompany');
 const GameInstance = mongoose.model('GameInstance');
+const GameScore = mongoose.model('GameScore');
 const Game = mongoose.model('Game');
 
 const User = mongoose.model('User');
@@ -210,7 +212,7 @@ router.post('/game', (req, res, next) => {
 });
 
 router.get('/game', (req, res) => {
-  res.render('admin/game-create');
+  res.render('admin/game/create');
 });
 
 router.get('/game-management', (req, res, next) => {
@@ -224,6 +226,56 @@ router.get('/game-management', (req, res, next) => {
     res.render('admin/game-management', viewModel);
   })
   .catch(next);
+});
+
+router.get('/graph/plays-per-hour', (req, res) => {
+  var viewModel = { };
+  var startDate = moment().subtract(24, 'hour').toDate();
+  GameScore
+  .aggregate([
+    {
+      $match: {
+        finished: { $gte: startDate }
+      }
+    },
+    {
+      $group: {
+        _id: {
+          year: { $year: '$finished' },
+          month: { $month: '$finished' },
+          day: { $dayOfMonth: '$finished' },
+          hour: { $hour: '$finished' }
+        },
+        minutesPlayed: { $sum: '$minutesPlayed' },
+        count: { $sum: 1 }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        date: {
+          $dateFromParts: {
+            year: '$_id.year',
+            month: '$_id.month',
+            day: '$_id.day',
+            hour: '$_id.hour'
+          }
+        },
+        minutesPlayed: '$minutesPlayed',
+        count: '$count'
+      }
+    }
+  ])
+  .then((graphData) => {
+    viewModel.graphData = graphData;
+    res.status(200).json(viewModel);
+  })
+  .catch((error) => {
+    console.log('admin graph data error', { error: error });
+    res
+    .status(error.code || error.statusCode || 500)
+    .json({ message: error.message || 'Internal server error' });
+  });
 });
 
 router.get('/', (req, res, next) => {

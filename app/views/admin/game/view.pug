@@ -1,5 +1,5 @@
-extends ../../layout
-block content
+extends ../layout
+block admin-content
   div.jumbotron
     h1= game.title
     p.large= game.headline
@@ -20,7 +20,7 @@ block content
           div.col Score
         each instance in instances
           div.row.mb-1
-            div.col= moment(instance.created).format('HH:MM:ss')
+            div.col= moment(instance.created).format('ddd HH:MM:ss')
             div.col= instance.user.username
             div.col= instance.state
             div.col= instance.startParams

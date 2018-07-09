@@ -45,7 +45,9 @@ module.exports = (app, config) => {
   }));
   app.use(cookieParser());
   app.use(compress());
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(path.join(config.root, 'public')));
+  app.use('/moment', express.static(path.join(config.root, 'node_modules', 'moment', 'min')));
+  app.use('/chart', express.static(path.join(config.root, 'node_modules', 'chart.js', 'dist')));
   app.use(methodOverride());
 
   app.set('trust proxy', 1);

@@ -1,9 +1,16 @@
 extends layout
 block content
 
-  div
-    a(href="/game")
-      img(src="/img/gabcade-logo-large.png", alt="gabcade logo").home-brand
+  //- div
+  //-   a(href="/game")
+  //-     img(src="/img/gabcade-logo-large.png", alt="gabcade logo").home-brand
+
+  div.row
+    div.col-3
+    div.col-6
+      div.embed-responsive.embed-responsive-16by9
+        video(src="/video/gaboom-remake.mp4" controls).embed-responsive-item
+    div.col-3
   
   h1.text-center.my-3 gabcade.com
 
