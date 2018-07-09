@@ -1,0 +1,15 @@
+{
+"companyName": "Gabcade.com",
+"productName": "Whack A Muslim",
+"dataUrl": "078a3574438b32654ac6e29180532f10.unityweb",
+"wasmCodeUrl": "917b5370dad972179d37f08e5e081a4a.unityweb",
+"wasmFrameworkUrl": "0e81f229bbdc82fa1e173444b74d02e4.unityweb",
+"asmCodeUrl": "48abf3373667703a25adddfcea5da34e.unityweb",
+"asmMemoryUrl": "feb371a8c4ffd2c609725fecd066cab8.unityweb",
+"asmFrameworkUrl": "e5a2caf35cffe8d23c3aa200d929121e.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
