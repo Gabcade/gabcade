@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -Rf nucleoid
+cp -R /home/rob/Public/NUCLEOID/Builds/HTML5/nucleoid .
+rm -f ./nucleoid/index.html
