@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Nucleoid",
+"dataUrl": "f80959bcfeebf8d78679fa49be804759.unityweb",
+"wasmCodeUrl": "3cc2b4d5995efff7b8904c402e045526.unityweb",
+"wasmFrameworkUrl": "ac64f0c416e059e4271d2c358815b156.unityweb",
+"asmCodeUrl": "7359661036477e318f05707b63b72931.unityweb",
+"asmMemoryUrl": "18605cc29af886c38fb441d16cb7aabb.unityweb",
+"asmFrameworkUrl": "bcc48c057a58636023c53d9468057aa9.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"}
+}
