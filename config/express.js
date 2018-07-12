@@ -2,6 +2,8 @@
 
 const glob = require('glob');
 const path = require('path');
+const fs = require('fs');
+const rfs = require('rotating-file-stream');
 
 const express = require('express');
 
@@ -40,7 +42,31 @@ module.exports = (app, config) => {
   });
 
   app.use(favicon(path.join(config.root, 'public', 'img', 'favicon.ico')));
-  app.use(logger('dev'));
+
+  var logDirectory = path.join(config.root, 'logs');
+  if (!fs.existsSync(logDirectory)) {
+    fs.mkdirSync(logDirectory);
+  }
+  var accessLogStream = rfs('gabcade-access.log', {
+    size: '25M',
+    interval: '1d',
+    path: logDirectory,
+    compress: 'gzip'
+  });
+  app.use(logger(app.locals.ENV_DEVELOPMENT ? 'dev' : 'combined', {
+    stream: accessLogStream,
+    skip: (req, res) => {
+      return (req.url === '/') && (res.statusCode < 400);
+    }
+  }));
+  if (app.locals.ENV_DEVELOPMENT) {
+    app.use(logger('dev', {
+      skip: (req, res) => {
+        return (req.url === '/') && (res.statusCode < 400);
+      }
+    }));
+  }
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: true
@@ -104,7 +130,7 @@ module.exports = (app, config) => {
 
   if (app.locals.ENV_DEVELOPMENT) {
     app.use((err, req, res, next) => { // jshint ignore:line
-      log.error('Gabcade error', { error: err });
+      log.error(err.message || 'Gabcade error', { url: req.url, error: err });
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,

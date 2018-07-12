@@ -586,9 +586,14 @@
 	},
 	"expanded_folders":
 	[
+		"/opt/sandbox/gabcade"
 	],
 	"file_history":
 	[
+		"/opt/sandbox/gabcade/config/express.js",
+		"/opt/sandbox/gabcade/gabcade.js",
+		"/opt/sandbox/gabcade/logs/gabcade-error.log",
+		"/opt/sandbox/opus1/client/thescorex/site/config/express.js",
 		"/opt/sandbox/gabcade/app/models/article.js",
 		"/opt/sandbox/gabcade/app/models/comment.js",
 		"/opt/sandbox/gabcade/public/css/components/img.less",
@@ -606,7 +611,6 @@
 		"/opt/sandbox/gabcade/app/views/blog/article-edit.pug",
 		"/opt/sandbox/gabcade/app/views/components/blog-article.pug",
 		"/opt/sandbox/gabcade/app/views/layout.pug",
-		"/opt/sandbox/gabcade/config/express.js",
 		"/opt/sandbox/gabcade/public/css/components/card.less",
 		"/opt/sandbox/gabcade/app/views/game/unity-player.pug",
 		"/opt/sandbox/gabcade/public/robots.txt",
@@ -692,7 +696,6 @@
 		"/opt/sandbox/opus1/client/thescorex/site/app/views/components/trading-knowledge.pug",
 		"/opt/sandbox/opus1/client/thescorex/site/app/views/exchange/buy.pug",
 		"/opt/sandbox/opus1/client/thescorex/site/app/controllers/exchange.js",
-		"/opt/sandbox/opus1/client/thescorex/site/config/express.js",
 		"/opt/sandbox/opus1/client/thescorex/site/app/models/micro-league.js",
 		"/opt/sandbox/opus1/client/thescorex/site/app/models/chat-message.js",
 		"/opt/sandbox/opus1/client/thescorex/site/app/models/user.js",
@@ -714,9 +717,7 @@
 		"/opt/sandbox/opus1/client/thescorex/site/app/views/team/view.pug",
 		"/opt/sandbox/opus1/client/thescorex/site/app.js",
 		"/opt/sandbox/opus1/client/thescorex/site/config/config.js",
-		"/opt/sandbox/opus1/client/thescorex/site/app/models/team.js",
-		"/opt/sandbox/opus1/client/thescorex/site/app/models/exchange-error.js",
-		"/opt/sandbox/opus1/client/thescorex/site/app/controllers/chat.js"
+		"/opt/sandbox/opus1/client/thescorex/site/app/models/team.js"
 	],
 	"find":
 	{
@@ -734,6 +735,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"-error",
+			"score",
 			"/games",
 			"Comment",
 			"slug",
@@ -847,7 +850,7 @@
 		"rows":
 		[
 			0.0,
-			0.622616255918,
+			0.212110083625,
 			1.0
 		]
 	},
@@ -906,7 +909,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 2,
 	"settings":
 	{
 	},
