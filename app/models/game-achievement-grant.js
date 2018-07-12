@@ -14,5 +14,4 @@ var GameAchievementGrantSchema = new Schema({
   achievement: { type: Schema.ObjectId, required: true, index: true, ref: 'GameAchievement' }
 });
 
-console.log('model: GameAchievement');
 mongoose.model('GameAchievementGrant', GameAchievementGrantSchema);

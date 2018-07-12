@@ -19,5 +19,4 @@ const CommentSchema = new Schema({
   content: { type: String }
 });
 
-console.log('model: Comment');
 mongoose.model('Comment', CommentSchema);

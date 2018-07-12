@@ -26,12 +26,12 @@ gulp.task('watch', () => {
 gulp.task('develop', () => {
   livereload.listen();
   nodemon({
-    script: 'app.js',
+    script: 'gabcade.js',
     ext: 'js coffee pug',
     stdout: false
   }).on('readable', function () {
     this.stdout.on('data', (chunk) => {
-      if (/^Express server listening on port/.test(chunk)) {
+      if (/Gabcade.com server listening/.test(chunk)) {
         livereload.changed(__dirname);
       }
     });

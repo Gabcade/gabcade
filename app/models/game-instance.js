@@ -30,5 +30,4 @@ GameInstanceSchema.index({
   name: 'gameinstance_state_user_idx'
 });
 
-console.log('model: GameInstance');
 mongoose.model('GameInstance', GameInstanceSchema);

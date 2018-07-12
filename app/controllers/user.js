@@ -310,6 +310,7 @@ class UserController extends GabcadeService {
 }
 
 module.exports = (app, config) => {
+  const log = app.locals.log;
   var controller = new UserController(app, config);
   app.use('/user', router);
 
@@ -320,7 +321,7 @@ module.exports = (app, config) => {
     'databases',
     'GeoLite2-City.mmdb'
   );
-  console.log('loading GeoLite2-City.mmdb');
+  log.info('loading GeoLite2-City.mmdb');
   controller.geoip2 = require('geoip2');
   controller.geoip2.init(dbpath);
 
@@ -334,7 +335,7 @@ module.exports = (app, config) => {
     });
   });
 
-  console.log('registering PassportJS local strategy');
+  log.info('registering PassportJS local strategy');
   passport.use(new LocalStrategy((username, password, done) => {
     var incorrectPasswordMessage, userNotFoundMessage;
     if (app.locals.ENV_DEVELOPMENT) {
@@ -356,7 +357,7 @@ module.exports = (app, config) => {
     });
   }));
 
-  console.log('registering PassportJS Stripe strategy');
+  log.info('registering PassportJS Stripe strategy');
   passport.use(new StripeStrategy({
       clientID: process.env.STRIPE_CLIENT_ID,
       clientSecret: process.env.STRIPE_SECRET_KEY,

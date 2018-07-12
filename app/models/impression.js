@@ -12,5 +12,4 @@ const ImpressionSchema = new Schema({
   user: { type: Schema.ObjectId, index: true, sparse: true, ref: 'User' }
 });
 
-console.log('model: Impression');
 mongoose.model('Impression', ImpressionSchema);

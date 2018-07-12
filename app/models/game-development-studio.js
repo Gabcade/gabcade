@@ -24,5 +24,4 @@ GameDevStudioSchema.index({
   name: 'game_studio_text_search'
 });
 
-console.log('model: GameDevStudio');
 mongoose.model('GameDevStudio', GameDevStudioSchema);

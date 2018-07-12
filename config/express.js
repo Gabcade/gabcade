@@ -22,6 +22,8 @@ const numeral = require('numeral');
 
 module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
+  const log = app.locals.log;
+
   app.locals.config = config;
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env === 'development' || env === 'local';
@@ -51,13 +53,13 @@ module.exports = (app, config) => {
   app.use(methodOverride());
 
   app.set('trust proxy', 1);
-  console.log('initializing redis session store');
+  log.info('initializing redis session store');
   var sessionStore = new RedisSessionStore(config.redis);
   config.http.session.store = sessionStore;
   config.https.session.store = sessionStore;
   app.use(session(config.http.session));
 
-  console.log('initializting PassportJS');
+  log.info('initializting PassportJS');
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -89,6 +91,8 @@ module.exports = (app, config) => {
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach((controller) => {
+    var pathObj = path.parse(controller);
+    log.info('Loading controller', { controller: pathObj.name });
     require(controller)(app, config);
   });
 
@@ -100,7 +104,7 @@ module.exports = (app, config) => {
 
   if (app.locals.ENV_DEVELOPMENT) {
     app.use((err, req, res, next) => { // jshint ignore:line
-      console.log(err);
+      log.error('Gabcade error', { error: err });
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,

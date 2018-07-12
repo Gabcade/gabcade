@@ -11,5 +11,4 @@ const StripeWebhookSchema = new Schema({
   data: { type: Schema.Types.Mixed }
 });
 
-console.log('model: User');
 mongoose.model('StripeWebhook', StripeWebhookSchema);

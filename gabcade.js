@@ -1,4 +1,4 @@
-// app.js
+// gabcade.js
 // Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>
 // License: MIT
 
@@ -7,11 +7,14 @@
 const express = require('express');
 const config = require('./config/config');
 const glob = require('glob');
+const path = require('path');
+
+const log = require(path.join(config.root, 'gabcade-winston'))(config);
+log.info("Gabcade.com Copyright (C) 2018 Rob Colbert <rob.colbert@openplatform.us>");
+log.info("License: MIT");
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
-const Twitter = require('twitter');
 
 mongoose.connect(config.db, { useMongoClient: true });
 const db = mongoose.connection;
@@ -21,14 +24,17 @@ db.on('error', () => {
 
 const models = glob.sync(config.root + '/app/models/*.js');
 models.forEach(function (model) {
+  var pathObj = path.parse(model);
+  log.info('Loading model', { model: pathObj.name });
   require(model);
 });
 
 const app = express();
-app.locals.twitter = new Twitter(config.twitter);
+app.locals.config = config;
+app.locals.log = log;
 
 module.exports = require('./config/express')(app, config);
 
 app.listen(config.http.listen.port, config.http.listen.host, 256, () => {
-  console.log('Express server listening on port ' + config.port);
+  log.info('Gabcade.com server listening', { port: config.port });
 });

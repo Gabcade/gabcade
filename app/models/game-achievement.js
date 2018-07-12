@@ -14,5 +14,4 @@ var GameAchievementSchema = new Schema({
   description: { type: String, required: true }
 });
 
-console.log('model: GameAchievement');
 mongoose.model('GameAchievement', GameAchievementSchema);

@@ -28,5 +28,4 @@ const AnnouncementSchema = new Schema({
   }
 });
 
-console.log('model: Announcement');
 mongoose.model('Announcement', AnnouncementSchema);

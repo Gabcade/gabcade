@@ -1,0 +1,28 @@
+extends ../layout
+block content
+  div.jumbotron
+    h1 Gabcade Leaderboards
+
+  div.row
+    each game in games
+      div.col-md-6
+        div.card.mb-3
+          div.card-header
+            h4.mb-0
+              a(href=`/game/${game.slug}`)= game.title
+          div.card-body
+            if !game.leaderboard || !game.leaderboard.length
+              p.lead.mb-0 No scores recorded
+            else
+              div.row.font-weight-bold
+                div.col Player
+                div.col Score
+                div.col Finished
+                div.col Note
+              each score in game.leaderboard
+                div.row
+                  div.col
+                    a(href=`/user/${score.user.username_lc}`)= score.user.username
+                  div.col= numeral(score.score).format('0,0')
+                  div.col= moment(score.finished).fromNow()
+                  div.col= score.note

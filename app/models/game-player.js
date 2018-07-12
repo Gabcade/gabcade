@@ -11,5 +11,4 @@ const GamePlayerSchema = new Schema({
   user: { type: Schema.ObjectId, required: true, index: true, ref: 'User' }
 });
 
-console.log('model: GamePlayer');
 mongoose.model('GamePlayer', GamePlayerSchema);

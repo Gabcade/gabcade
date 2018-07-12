@@ -51,5 +51,4 @@ GameSchema.index({
   name: 'game_text_search'
 });
 
-console.log('model: Game');
 mongoose.model('Game', GameSchema);

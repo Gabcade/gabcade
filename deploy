@@ -1,4 +1,5 @@
 #!/bin/bash
+forever stopall
 git pull origin master
-forever restartall
+forever start gabcade.js
 forever logs 0 -f

@@ -17,5 +17,4 @@ const ImageSchema = new Schema({
   data: { type: Buffer, select: false }
 });
 
-console.log('model: Image');
 mongoose.model('Image', ImageSchema);

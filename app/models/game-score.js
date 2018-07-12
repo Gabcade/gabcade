@@ -38,5 +38,4 @@ GameScoreSchema.index({
   name: 'game_user_score_idx'
 });
 
-console.log('model: GameScore');
 mongoose.model('GameScore', GameScoreSchema);

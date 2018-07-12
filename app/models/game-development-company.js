@@ -22,5 +22,4 @@ GameDevCompanySchema.index({
   }
 });
 
-console.log('model: GameDevCompany');
 mongoose.model('GameDevCompany', GameDevCompanySchema);

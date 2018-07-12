@@ -30,5 +30,4 @@ GameDeveloperSchema.index({
   name: 'game_dev_text_search'
 });
 
-console.log('model: GameDeveloper');
 mongoose.model('GameDeveloper', GameDeveloperSchema);

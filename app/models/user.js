@@ -48,5 +48,4 @@ const UserSchema = new Schema({
   }
 });
 
-console.log('model: User');
 mongoose.model('User', UserSchema);

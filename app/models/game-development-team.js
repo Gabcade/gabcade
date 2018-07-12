@@ -23,5 +23,4 @@ GameDevTeamSchema.index({
   }
 });
 
-console.log('model: GameDevTeam');
 mongoose.model('GameDevTeam', GameDevTeamSchema);

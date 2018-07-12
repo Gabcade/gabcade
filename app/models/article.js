@@ -15,5 +15,4 @@ const ArticleSchema = new Schema({
   icon: { type: Schema.ObjectId, ref: 'Image' }
 });
 
-console.log('model: Article');
 mongoose.model('Article', ArticleSchema);
