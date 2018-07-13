@@ -11,6 +11,8 @@ const mongoose = require('mongoose');
 
 const Game = mongoose.model('Game');
 const GamePlayer = mongoose.model('GamePlayer');
+const GameScore = mongoose.model('GameScore');
+
 const Comment = mongoose.model('Comment'); // jshint ignore:line
 const Impression = mongoose.model('Impression');
 
@@ -20,6 +22,7 @@ const GabcadeService = require('../gabcade-service');
 module.exports = (app, config) => {
   module.app = app;
   module.config = config;
+  module.log = app.locals.log;
   module.service = new GabcadeService(app, config);
   app.use('/game', router);
 };
@@ -128,8 +131,25 @@ router.get('/:slug/player', (req, res, next) => {
   })
   .then((game) => {
     viewModel.game = game;
-
-    switch (game.technology) {
+    return GameScore
+    .find({ game: viewModel.game._id })
+    .sort({ score: -1 })
+    .limit(10)
+    .populate('user')
+    .lean();
+  })
+  .then((scores) => {
+    viewModel.leaderboard = scores;
+    return GameScore
+    .find({ game: viewModel.game._id })
+    .sort({ finished: -1 })
+    .limit(10)
+    .populate('user')
+    .lean();
+  })
+  .then((scores) => {
+    viewModel.recentGames = scores;
+    switch (viewModel.game.technology) {
       case 'U3':
         res.render('game/unity-player', viewModel);
         break;

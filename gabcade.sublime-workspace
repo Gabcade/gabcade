@@ -586,15 +586,28 @@
 	},
 	"expanded_folders":
 	[
-		"/opt/sandbox/gabcade"
+		"/opt/sandbox/gabcade",
+		"/opt/sandbox/gabcade/app",
+		"/opt/sandbox/gabcade/app/controllers",
+		"/opt/sandbox/gabcade/app/models",
+		"/opt/sandbox/gabcade/app/views",
+		"/opt/sandbox/gabcade/app/views/game",
+		"/opt/sandbox/gabcade/app/views/leaderboard"
 	],
 	"file_history":
 	[
+		"/opt/sandbox/gabcade/app/models/game-score.js",
+		"/opt/sandbox/gabcade/app/models/game.js",
+		"/opt/sandbox/gabcade/app/controllers/game.js",
+		"/opt/sandbox/gabcade/app/views/game/unity-player.pug",
+		"/opt/sandbox/gabcade/app/views/leaderboard/index.pug",
+		"/opt/sandbox/gabcade/app/models/article.js",
+		"/opt/sandbox/gabcade/app/models/announcement.js",
+		"/opt/sandbox/gabcade/app/controllers/admin.js",
 		"/opt/sandbox/gabcade/config/express.js",
 		"/opt/sandbox/gabcade/gabcade.js",
 		"/opt/sandbox/gabcade/logs/gabcade-error.log",
 		"/opt/sandbox/opus1/client/thescorex/site/config/express.js",
-		"/opt/sandbox/gabcade/app/models/article.js",
 		"/opt/sandbox/gabcade/app/models/comment.js",
 		"/opt/sandbox/gabcade/public/css/components/img.less",
 		"/opt/sandbox/gabcade/app/views/components/comment-composer.pug",
@@ -612,11 +625,9 @@
 		"/opt/sandbox/gabcade/app/views/components/blog-article.pug",
 		"/opt/sandbox/gabcade/app/views/layout.pug",
 		"/opt/sandbox/gabcade/public/css/components/card.less",
-		"/opt/sandbox/gabcade/app/views/game/unity-player.pug",
 		"/opt/sandbox/gabcade/public/robots.txt",
 		"/opt/sandbox/gabcade/public/builds/fake-news-wars/Build/9e1d72f9a1b011fa685677846f23470b.json",
 		"/opt/sandbox/gabcade/public/builds/fake-news-wars/Build/78586924f8856bbad7e15767a691574a.js",
-		"/opt/sandbox/gabcade/app/controllers/game.js",
 		"/opt/sandbox/gabcade/app/views/blog/compose.pug",
 		"/opt/sandbox/gabcade/app/controllers/home.js",
 		"/opt/sandbox/gabcade/app/controllers/announcement.js",
@@ -627,7 +638,6 @@
 		"/opt/sandbox/gabcade/app/controllers/user.js",
 		"/opt/sandbox/gabcade/public/css/components/form.less",
 		"/opt/sandbox/gabcade/public/css/components/small.less",
-		"/opt/sandbox/gabcade/app/models/game.js",
 		"/opt/sandbox/gabcade/app/views/components/game-unity3d.pug",
 		"/opt/sandbox/gabcade/gulpfile.js",
 		"/opt/sandbox/gabcade/public/css/components/webgl-content.less",
@@ -649,7 +659,6 @@
 		"/opt/sandbox/gabcade/app/views/user/edit.pug",
 		"/opt/sandbox/gabcade/public/css/variables.less",
 		"/opt/sandbox/gabcade/public/builds/maga-casino-slots/TemplateData/style.css",
-		"/opt/sandbox/gabcade/app/controllers/admin.js",
 		"/opt/sandbox/gabcade/app/views/admin/game-edit.pug",
 		"/opt/sandbox/gabcade/app/views/admin/game-create.pug",
 		"/opt/sandbox/gabcade/README.md",
@@ -661,7 +670,6 @@
 		"/opt/sandbox/gabcade/app/views/admin/game-developer-edit.pug",
 		"/opt/sandbox/gabcade/app/models/user.js",
 		"/opt/sandbox/opus1/client/thescorex/site/app/views/user/profile.pug",
-		"/opt/sandbox/gabcade/app/models/announcement.js",
 		"/opt/sandbox/gabcade/app/models/image.js",
 		"/opt/sandbox/opus1/site/news.pontemedium.com/app/models/image.js",
 		"/opt/sandbox/gabcade/app/models/game-development-company.js",
@@ -715,13 +723,11 @@
 		"/opt/sandbox/opus1/client/openplatform.us/public/game/nucleoid/TemplateData/style.css",
 		"/opt/sandbox/opus1/client/openplatform.us/app.js",
 		"/opt/sandbox/opus1/client/thescorex/site/app/views/team/view.pug",
-		"/opt/sandbox/opus1/client/thescorex/site/app.js",
-		"/opt/sandbox/opus1/client/thescorex/site/config/config.js",
-		"/opt/sandbox/opus1/client/thescorex/site/app/models/team.js"
+		"/opt/sandbox/opus1/client/thescorex/site/app.js"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -735,6 +741,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"log",
 			"-error",
 			"score",
 			"/games",
@@ -844,13 +851,13 @@
 		"cols":
 		[
 			0.0,
-			0.639060305321,
+			0.5,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
-			0.212110083625,
+			0.5,
 			1.0
 		]
 	},
@@ -909,7 +916,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 2,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -917,7 +924,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 325.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

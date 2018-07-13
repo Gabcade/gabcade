@@ -14,13 +14,55 @@ block gamejs
 block content
   
   div.card.my-3
-    div.card-header= game.title
+    //- div.card-header= game.title
     div.card-body
       div.webgl-content
         div(id="gameContainer").game-container.embed-responsive.embed-responsive-16by9
     div.card-footer
       button(onclick="gameInstance.SetFullscreen(1)").btn.btn-default.mr-3 fullscreen
       a(href=`/game/${game.slug}/discuss`) Discuss
+
+  div.row.my-3
+    div.col
+      div.card
+        div.card-header
+          h4.mb-0 Leaderboard
+        div.card-body
+          if !leaderboard || !leaderboard.length
+            p.lead.mb-0 No scores recorded
+          else
+            div.row.font-weight-bold
+              div.col Player
+              div.col Score
+              div.col Finished
+              div.col Note
+            each score in leaderboard
+              div.row
+                div.col
+                  a(href=`/user/${score.user.username_lc}`)= score.user.username
+                div.col= numeral(score.score).format('0,0')
+                div.col= moment(score.finished).fromNow()
+                div.col= score.note
+    div.col
+      div.card
+        div.card-header
+          h4.mb-0 Recent Games
+        div.card-body
+          if !recentGames || !recentGames.length
+            p.lead.mb-0 No scores recorded
+          else
+            div.row.font-weight-bold
+              div.col Player
+              div.col Score
+              div.col Finished
+              div.col Note
+            each score in recentGames
+              div.row
+                div.col
+                  a(href=`/user/${score.user.username_lc}`)= score.user.username
+                div.col= numeral(score.score).format('0,0')
+                div.col= moment(score.finished).fromNow()
+                div.col= score.note
 
   script.
     var gameInstance = UnityLoader.instantiate(
