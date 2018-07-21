@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -Rf gabman
+cp -R /home/rob/Public/Projects/gabman/Builds/HTML5/gabman .
+rm -f ./gabman/index.html

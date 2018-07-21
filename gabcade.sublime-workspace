@@ -587,17 +587,16 @@
 	"expanded_folders":
 	[
 		"/opt/sandbox/gabcade",
-		"/opt/sandbox/gabcade/app",
-		"/opt/sandbox/gabcade/app/controllers",
-		"/opt/sandbox/gabcade/app/models",
-		"/opt/sandbox/gabcade/app/views",
-		"/opt/sandbox/gabcade/app/views/game",
-		"/opt/sandbox/gabcade/app/views/leaderboard"
+		"/opt/sandbox/gabcade/public",
+		"/opt/sandbox/gabcade/public/builds",
+		"/opt/sandbox/gabcade/public/builds/gabman",
+		"/opt/sandbox/gabcade/public/builds/gabman/Build"
 	],
 	"file_history":
 	[
-		"/opt/sandbox/gabcade/app/models/game-score.js",
+		"/opt/sandbox/gabcade/public/css/components/home-icon.less",
 		"/opt/sandbox/gabcade/app/models/game.js",
+		"/opt/sandbox/gabcade/app/models/game-score.js",
 		"/opt/sandbox/gabcade/app/controllers/game.js",
 		"/opt/sandbox/gabcade/app/views/game/unity-player.pug",
 		"/opt/sandbox/gabcade/app/views/leaderboard/index.pug",
@@ -650,7 +649,6 @@
 		"/opt/sandbox/gabcade/public/css/components/body.less",
 		"/opt/sandbox/gabcade/public/css/components/game-credit.less",
 		"/opt/sandbox/gabcade/public/css/components/hashtags.less",
-		"/opt/sandbox/gabcade/public/css/components/home-icon.less",
 		"/opt/sandbox/gabcade/public/css/components/pre.less",
 		"/opt/sandbox/gabcade/public/css/components/sidebar-menu.less",
 		"/opt/sandbox/gabcade/public/css/components/footer-hashtags.css",
@@ -851,13 +849,13 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.563322884013,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
-			0.5,
+			0.362886597938,
 			1.0
 		]
 	},
@@ -900,12 +898,16 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"/opt/sandbox/opus1/client/thescorex/theSCOREX.sublime-workspace"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{
@@ -916,7 +918,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -924,7 +926,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 325.0,
+	"side_bar_width": 450.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

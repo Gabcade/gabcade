@@ -1,0 +1,16 @@
+{
+"companyName": "Gabcade.com",
+"productName": "Gab Man",
+"dataUrl": "6e0e16b7b3e2aec1b92f4a020a292b2d.unityweb",
+"wasmCodeUrl": "5220f19ceb280279622e110935853cf2.unityweb",
+"wasmFrameworkUrl": "f90cf3665ba2718e62b6b7977028c338.unityweb",
+"asmCodeUrl": "8d23d58e32bcd0eec94b1d582cab2abb.unityweb",
+"asmMemoryUrl": "a53ba33bc3988c48e2712e4130aff2e1.unityweb",
+"asmFrameworkUrl": "d2c80865d30d68cdc43434dac5b0c813.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"}
+}
